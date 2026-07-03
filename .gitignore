@@ -1,0 +1,11 @@
+# Ferramentas locais / preview
+.claude/
+
+# Pastas-fonte (as versões usadas pelo site ficam em assets/)
+Logos em PNG/
+
+# Lixo de SO / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*~lock~*

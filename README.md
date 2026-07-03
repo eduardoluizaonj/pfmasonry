@@ -1,4 +1,4 @@
-# PF Construction Masonry — Site institucional ("Sitework")
+# PF Construction Masonry — Site institucional
 
 Site **estático** (HTML + CSS + JavaScript puro), **trilíngue (EN / PT / ES)**,
 sem banco de dados e sem servidor. Custo de manutenção ≈ **R$ 0** (só o domínio).
@@ -9,17 +9,23 @@ Cliente: **PF Construction Masonry** — Long Branch, NJ (atende Monmouth County
 - E-mail: **pf732masonry@gmail.com**
 
 ## 🎨 O design
-Layout industrial escuro ("Sitework"): a página lê como um caderno de projeto
-de obra — fundo quase-preto neutro, tipografia de sinalização (Sora 800
-maiúscula) + corpo Inter + anotações técnicas em IBM Plex Mono, réguas de 1px
-estilo blueprint, seções numeradas como folhas (Sheet 01–08), fitas de
-segurança vermelhas entre seções, cruzes de topografia, placas de legenda
-"FIG. NN" nas fotos, botões chanfrados e UMA seção clara (Processo) como folha
-de papel puxada do caderno. Animações "Cut Stone": revelação de imagens por
-corte (clip-path), títulos subindo de máscaras, réguas que se desenham,
-contadores, marquee dos serviços e prévia de foto que segue o cursor na lista
-de serviços. Tudo respeita `prefers-reduced-motion` e funciona sem JS
-(conteúdo sempre visível).
+Linguagem visual da família AMP Floors (claro, cards arredondados, sombras
+suaves, Inter + Sora, botões pílula), com a paleta vermelho/preto da logo e o
+**layout remixado** para não ficar igual ao site da AMP:
+- Hero dividido: texto à esquerda, foto arredondada à direita com card
+  flutuante de avaliação (em vez de foto full-screen)
+- Números em card escuro arredondado "flutuando" sobre o hero
+- Serviços em cards horizontais (ícone à esquerda) em 2 colunas, com um
+  card vermelho de CTA fechando a grade
+- Instagram como trilho horizontal de cards 9:16 com botão de play e card
+  final de "Seguir" (sem o mockup de celular)
+- Sobre com texto à esquerda e fotos à direita (lados invertidos)
+- Processo como linha do tempo conectada por linha tracejada (sem cards)
+- Galeria em mosaico (primeira foto grande 2×2) com filtros de pílula
+- Faixa CTA em container arredondado (não full-bleed) com telefone grande
+- Depoimento central em destaque; contato com formulário à esquerda
+Animações: reveals suaves ao rolar, contadores e hover lift — a mesma família
+do site da AMP. Tudo respeita `prefers-reduced-motion` e funciona sem JS.
 
 ```
 PF Masonry/
@@ -87,17 +93,16 @@ miniaturas/links dos reels (ver `assets/videos/LEIA-ME.txt`).
 - Horário de atendimento (chave `contact.hoursV`) — confirmar.
 
 ### 6. Cores — `assets/css/styles.css`
-No topo, em `:root`. Paleta neutra: fundo `--bg: #0C0C0E`, painéis
-`--surface-1/2`, a folha clara `--paper: #F1F1F3` (só a seção Processo) e o
-vermelho da logo `--red: #D32027` (fita de segurança, CTAs e marcas).
-Fontes: Sora / Inter / IBM Plex Mono (Google Fonts, carregadas no `<head>`).
+No topo, em `:root`. A paleta segue a **logo da PF Masonry**
+(vermelho `--primary: #d32027` + preto grafite `--ink: #15171b`) sobre fundo
+branco/cinza neutro. Fontes: Inter (corpo) + Sora (títulos), via Google Fonts.
 
 ### 7. Logos
 | Arquivo                   | Onde aparece                                   |
 |---------------------------|------------------------------------------------|
-| `header-logo-white.png`   | Cabeçalho e menu mobile (fundo escuro)         |
-| `header-logo.png`         | (reserva para fundos claros)                   |
-| `logo-white.png`          | (reserva — o rodapé usa wordmark tipográfico)  |
+| `header-logo.png`         | Cabeçalho (PF vermelho/preto sobre branco)     |
+| `header-logo-white.png`   | (reserva para fundos escuros)                  |
+| `logo-white.png`          | Rodapé (lockup completo em branco)             |
 | `favicon.png`             | Ícone da aba do navegador (512×512)            |
 
 ### 8. Fotos — `assets/img/`

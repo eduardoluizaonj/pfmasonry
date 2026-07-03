@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PF CONSTRUCTION MASONRY — JavaScript ("Atelier Stone" / animações CUT STONE)
+   PF CONSTRUCTION MASONRY — JavaScript
    ==========================================================================*/
 
 /* ┌────────────────────────────────────────────────────────────────────────┐
@@ -29,8 +29,9 @@ const CONFIG = {
 document.addEventListener("DOMContentLoaded", () => {
   "use strict";
 
-  const RM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const T = (k, fb) => (window.PF_I18N ? window.PF_I18N.t(k) : (fb || k));
+  const RM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const SCROLL_BEHAVIOR = RM ? "auto" : "smooth";
 
   /* ---------- 1. Links do WhatsApp (mensagem acompanha o idioma) ---------- */
   function waUrl(text) {
@@ -47,139 +48,88 @@ document.addEventListener("DOMContentLoaded", () => {
   wireWhatsApp();
   document.addEventListener("i18n:applied", wireWhatsApp);
 
-  /* ---------- 2. Costura de progresso + cabeçalho compacto + WhatsApp flutuante ---------- */
-  const seam = document.querySelector("[data-seam]");
-  const headerEl = document.querySelector("[data-header]");
-  const waFloat = document.querySelector("[data-wa-float]");
-  let scrollDirty = true;
+  /* ---------- 2. Cabeçalho ganha sombra ao rolar ---------- */
+  const header = document.querySelector("[data-header]");
+  const onScroll = () => header && header.classList.toggle("is-scrolled", window.scrollY > 30);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
 
-  function onScrollFrame() {
-    if (scrollDirty) {
-      scrollDirty = false;
-      const y = window.scrollY;
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      if (seam) seam.style.transform = `scaleX(${max > 0 ? Math.min(y / max, 1) : 0})`;
-      if (headerEl) headerEl.classList.toggle("is-tight", y > 120);
-      if (waFloat) waFloat.classList.toggle("show", y > window.innerHeight * 0.8);
-      driftFrame(y);
-    }
-    previewFrame();
-    requestAnimationFrame(onScrollFrame);
-  }
-  window.addEventListener("scroll", () => { scrollDirty = true; }, { passive: true });
-
-  /* ---------- 3. DRIFT — parallax sutil (desktop, sem reduced-motion) ---------- */
-  const driftEls = [];
-  const driftOn = !RM && window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches;
-  if (driftOn) {
-    document.querySelectorAll("[data-drift]").forEach((el) => {
-      driftEls.push({ el, factor: parseFloat(el.dataset.drift) || 0.06, base: 0, applied: 0 });
+  /* ---------- 3. Menu mobile ---------- */
+  const toggle = document.querySelector("[data-nav-toggle]");
+  const nav = document.getElementById("menu");
+  if (toggle && nav) {
+    const closeNav = () => { nav.classList.remove("is-open"); toggle.setAttribute("aria-expanded", "false"); };
+    toggle.addEventListener("click", () => {
+      const open = nav.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(open));
     });
-    const measure = () => {
-      driftEls.forEach((d) => {
-        const r = d.el.getBoundingClientRect();
-        d.base = r.top + window.scrollY - d.applied;
-      });
-    };
-    window.addEventListener("resize", measure);
-    window.addEventListener("load", measure);
-    measure();
-  }
-  function driftFrame(y) {
-    driftEls.forEach((d) => {
-      const center = d.base + d.el.offsetHeight / 2;
-      const delta = (y + window.innerHeight / 2 - center) * d.factor;
-      d.applied = Math.max(-32, Math.min(32, delta));
-      d.el.style.transform = `translate3d(0, ${d.applied.toFixed(1)}px, 0)`;
-    });
+    nav.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeNav));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeNav(); });
   }
 
-  /* ---------- 4. Observer único do sistema CUT STONE ---------- */
-  const animEls = document.querySelectorAll("[data-anim], [data-proc]");
-  // filhos de grupos ganham stagger
-  document.querySelectorAll("[data-anim-group]").forEach((group) => {
-    let i = 0;
-    group.querySelectorAll("[data-anim]").forEach((child) => {
-      if (child.dataset.anim === "rise" || child.dataset.anim === "chisel") {
-        child.style.transitionDelay = `${Math.min(i * 70, 560)}ms`;
-        i++;
-      }
-    });
-  });
-
-  function enter(el) {
-    el.classList.add("in");
-    if (el.dataset.anim === "tally") runTally(el);
-    // limpa o delay depois da entrada para não atrasar hovers futuros
-    if (el.style.transitionDelay) setTimeout(() => { el.style.transitionDelay = ""; }, 1600);
-  }
-
+  /* ---------- 4. Animações de entrada (reveal) ---------- */
+  const revealEls = document.querySelectorAll(".reveal");
+  // Depois da entrada, remove as classes do reveal para devolver ao elemento
+  // seus próprios transforms/transições (hover lift, card em destaque etc.)
+  const revealEl = (el) => {
+    el.classList.add("is-visible");
+    setTimeout(() => { el.classList.remove("reveal", "is-visible"); }, 1600);
+  };
   if ("IntersectionObserver" in window && !RM) {
     const io = new IntersectionObserver((entries, obs) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) { enter(e.target); obs.unobserve(e.target); }
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) { revealEl(entry.target); obs.unobserve(entry.target); }
       });
-    }, { threshold: 0.2, rootMargin: "0px 0px -8% 0px" });
-    animEls.forEach((el) => io.observe(el));
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    revealEls.forEach((el) => io.observe(el));
   } else {
-    animEls.forEach((el) => enter(el));
+    revealEls.forEach((el) => revealEl(el));
   }
 
   // Failsafe: se nada foi revelado após o carregamento, mostra tudo.
   window.addEventListener("load", () => setTimeout(() => {
-    if (!document.querySelector("[data-anim].in")) animEls.forEach((el) => el.classList.add("in"));
-  }, 1200));
+    if (document.querySelector(".reveal") && !document.querySelector(".reveal.is-visible")) {
+      document.querySelectorAll(".reveal").forEach((el) => revealEl(el));
+    }
+  }, 1000));
 
-  /* ---------- 5. TALLY — contadores ---------- */
-  function runTally(el) {
-    const target = parseInt(el.dataset.count, 10) || 0;
-    if (RM) { el.textContent = String(target); return; }
-    const dur = 1400, start = performance.now();
+  /* ---------- 4b. Mapa: carrega só quando entra na tela ---------- */
+  const mapWrap = document.querySelector("[data-map]");
+  if (mapWrap) {
+    const iframe = mapWrap.querySelector("iframe");
+    const loadMap = () => { if (iframe && iframe.dataset.src && !iframe.src) iframe.src = iframe.dataset.src; };
+    if ("IntersectionObserver" in window) {
+      const mo = new IntersectionObserver((entries, obs) => {
+        entries.forEach((e) => { if (e.isIntersecting) { loadMap(); obs.disconnect(); } });
+      }, { rootMargin: "200px" });
+      mo.observe(mapWrap);
+    } else { loadMap(); }
+  }
+
+  /* ---------- 5. Contadores dos números ---------- */
+  const counters = document.querySelectorAll("[data-count]");
+  const runCounter = (el) => {
+    const target = +el.dataset.count;
+    if (RM) { el.textContent = target.toLocaleString("en-US"); return; }
+    const dur = 1600, start = performance.now();
     const tick = (now) => {
       const p = Math.min((now - start) / dur, 1);
-      const eased = p === 1 ? 1 : 1 - Math.pow(2, -10 * p); // easeOutExpo
-      el.textContent = String(Math.round(target * eased));
+      const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+      el.textContent = Math.round(target * eased).toLocaleString("en-US");
       if (p < 1) requestAnimationFrame(tick);
     };
-    el.textContent = "0";
     requestAnimationFrame(tick);
+  };
+  if ("IntersectionObserver" in window) {
+    const co = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => { if (entry.isIntersecting) { runCounter(entry.target); obs.unobserve(entry.target); } });
+    }, { threshold: 0.6 });
+    counters.forEach((c) => co.observe(c));
+  } else {
+    counters.forEach((c) => (c.textContent = (+c.dataset.count).toLocaleString("en-US")));
   }
 
-  /* ---------- 6. Ticker (marquee) — duplica o conteúdo e pausa fora da tela ---------- */
-  const ticker = document.querySelector("[data-ticker]");
-  const tickerTrack = document.querySelector("[data-ticker-track]");
-  if (ticker && tickerTrack) {
-    const clone = document.createElement("span");
-    clone.setAttribute("aria-hidden", "true");
-    clone.style.display = "contents";
-    clone.innerHTML = tickerTrack.innerHTML;
-    tickerTrack.appendChild(clone);
-    ticker.classList.add("ready");
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver((ents) => ents.forEach((en) => {
-        ticker.classList.toggle("paused", !en.isIntersecting);
-      })).observe(ticker);
-    }
-  }
-
-  /* ---------- 7. Menu mobile ---------- */
-  const menu = document.querySelector("[data-menu]");
-  const openBtns = document.querySelectorAll("[data-menu-open]");
-  const closeBtn = document.querySelector("[data-menu-close]");
-  function setMenu(open) {
-    menu.classList.toggle("open", open);
-    menu.setAttribute("aria-hidden", String(!open));
-    openBtns.forEach((b) => b.setAttribute("aria-expanded", String(open)));
-    document.body.style.overflow = open ? "hidden" : "";
-  }
-  if (menu) {
-    openBtns.forEach((b) => b.addEventListener("click", () => setMenu(true)));
-    if (closeBtn) closeBtn.addEventListener("click", () => setMenu(false));
-    menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && menu.classList.contains("open")) setMenu(false); });
-  }
-
-  /* ---------- 8. Navegação ativa conforme a seção visível ---------- */
+  /* ---------- 6. Navegação ativa conforme a seção visível ---------- */
   const sections = document.querySelectorAll("main section[id]");
   const navLinks = document.querySelectorAll(".nav__link");
   if ("IntersectionObserver" in window) {
@@ -190,142 +140,89 @@ document.addEventListener("DOMContentLoaded", () => {
           navLinks.forEach((l) => l.classList.toggle("is-active", l.getAttribute("href") === `#${id}`));
         }
       });
-    }, { rootMargin: "-40% 0px -55% 0px" });
+    }, { rootMargin: "-45% 0px -50% 0px" });
     sections.forEach((s) => so.observe(s));
   }
 
-  /* ---------- 9. Serviços: prévia que segue o cursor + acordeão mobile ---------- */
-  const svcList = document.querySelector(".svc-list");
-  const preview = document.querySelector("[data-svc-preview]");
-  const previewImg = preview ? preview.querySelector("img") : null;
-  const fineHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-  const isMobileMode = () => window.matchMedia("(max-width: 1023px)").matches;
-  let pv = { x: 0, y: 0, tx: 0, ty: 0, on: false };
+  /* ---------- 7. Trilho de reels (Instagram): setas rolam o trilho ---------- */
+  const rail = document.querySelector("[data-rail]");
+  if (rail) {
+    const step = () => {
+      const card = rail.querySelector(".reel-card");
+      return card ? card.getBoundingClientRect().width + 18 : 260;
+    };
+    document.querySelector("[data-rail-prev]")?.addEventListener("click", () => rail.scrollBy({ left: -step(), behavior: SCROLL_BEHAVIOR }));
+    document.querySelector("[data-rail-next]")?.addEventListener("click", () => rail.scrollBy({ left: step(), behavior: SCROLL_BEHAVIOR }));
+  }
 
-  if (svcList && preview && fineHover && !RM) {
-    svcList.addEventListener("mousemove", (e) => { pv.tx = e.clientX + 28; pv.ty = e.clientY - 100; });
-    svcList.querySelectorAll(".svc__row").forEach((row) => {
-      row.addEventListener("mouseenter", (e) => {
-        if (isMobileMode()) return;
-        if (previewImg && row.dataset.preview && previewImg.getAttribute("src") !== row.dataset.preview) {
-          previewImg.src = row.dataset.preview;
-        }
-        // no primeiro hover, nasce já na posição do cursor (sem "voar" do canto)
-        pv.tx = e.clientX + 28; pv.ty = e.clientY - 100;
-        if (!pv.on) { pv.x = pv.tx; pv.y = pv.ty; }
-        pv.on = true; preview.classList.add("on");
+  /* ---------- 8. Filtro da galeria ---------- */
+  const filters = document.querySelectorAll(".filter");
+  const works = document.querySelectorAll(".work");
+  filters.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filters.forEach((b) => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+      const cat = btn.dataset.filter;
+      works.forEach((w) => {
+        const show = cat === "all" || w.dataset.category === cat;
+        w.classList.toggle("is-hidden", !show);
       });
     });
-    svcList.addEventListener("mouseleave", () => { pv.on = false; preview.classList.remove("on"); });
-  }
-  function previewFrame() {
-    if (!preview || !pv.on) return;
-    pv.x += (pv.tx - pv.x) * 0.12;
-    pv.y += (pv.ty - pv.y) * 0.12;
-    preview.style.transform = `translate(${pv.x.toFixed(1)}px, ${pv.y.toFixed(1)}px)`;
-  }
-
-  // Pré-seleciona o serviço no formulário + acordeão no mobile
-  const serviceSelect = document.getElementById("servico");
-  function preselect(service) {
-    if (serviceSelect && service) serviceSelect.value = service;
-  }
-  document.querySelectorAll(".svc__row").forEach((row) => {
-    row.addEventListener("click", (e) => {
-      // esconde a prévia (a página rola sob o cursor e o mouseleave não dispara)
-      if (preview) { pv.on = false; preview.classList.remove("on"); }
-      if (isMobileMode()) {
-        e.preventDefault();
-        const item = row.closest(".svc");
-        const wasOpen = item.classList.contains("open");
-        document.querySelectorAll(".svc.open").forEach((s) => {
-          s.classList.remove("open");
-          const p = s.querySelector(".svc__panel");
-          if (p) p.style.maxHeight = "";
-        });
-        if (!wasOpen) {
-          item.classList.add("open");
-          // altura real do conteúdo (um teto fixo cortava o painel em tablets)
-          const p = item.querySelector(".svc__panel");
-          if (p) p.style.maxHeight = p.scrollHeight + "px";
-        }
-      } else {
-        preselect(row.dataset.service);
-      }
-    });
-  });
-  document.querySelectorAll(".svc__panel a[data-service]").forEach((a) => {
-    a.addEventListener("click", () => preselect(a.dataset.service));
   });
 
-  /* ---------- 10. Depoimentos: um por vez ---------- */
-  const tstage = document.querySelector("[data-tstage]");
-  if (tstage) {
-    const quotes = [...tstage.querySelectorAll(".tq")];
-    const idxEl = document.querySelector("[data-tindex]");
-    let ti = 0, timer = null, paused = false;
-    const show = (i) => {
-      ti = (i + quotes.length) % quotes.length;
-      quotes.forEach((q, n) => q.classList.toggle("is-active", n === ti));
-      if (idxEl) idxEl.textContent = `${ti + 1} / ${quotes.length}`;
-    };
-    // não re-arma o timer enquanto o usuário está com o mouse/foco no bloco
-    const restart = () => {
-      if (RM || paused) return;
-      clearInterval(timer);
-      timer = setInterval(() => show(ti + 1), 8000);
-    };
-    document.querySelector("[data-tprev]")?.addEventListener("click", () => { show(ti - 1); restart(); });
-    document.querySelector("[data-tnext]")?.addEventListener("click", () => { show(ti + 1); restart(); });
-    const band = tstage.closest(".tband");
-    if (band) {
-      band.addEventListener("mouseenter", () => { paused = true; clearInterval(timer); });
-      band.addEventListener("mouseleave", () => { paused = false; restart(); });
-      band.addEventListener("focusin", () => { paused = true; clearInterval(timer); });
-      band.addEventListener("focusout", () => { paused = false; restart(); });
-    }
-    restart();
-  }
-
-  /* ---------- 11. Lightbox (claro) com setas, teclado e swipe ---------- */
+  /* ---------- 9. Lightbox da galeria (teclado + swipe) ---------- */
   const lb = document.querySelector("[data-lightbox]");
   if (lb) {
     const lbImg = lb.querySelector("[data-lb-img]");
     const lbCap = lb.querySelector("[data-lb-cap]");
-    const lbCount = lb.querySelector("[data-lb-count]");
-    const items = [...document.querySelectorAll(".work__btn")];
-    let cur = 0, lastFocus = null, swipeX = null;
+    let visibleWorks = [], current = 0, lastFocus = null, swipeX = null, squelchClick = false;
 
-    const render = () => {
-      const it = items[cur];
-      lbImg.src = it.dataset.full;
-      lbImg.alt = it.querySelector("img").alt || "";
-      lbCap.textContent = it.dataset.caption || "";
-      lbCount.textContent = `${cur + 1} / ${items.length}`;
+    const showLightbox = () => {
+      const w = visibleWorks[current];
+      lbImg.src = w.dataset.full;
+      lbImg.alt = (w.querySelector("img") || {}).alt || "";
+      lbCap.textContent = w.dataset.caption || "";
     };
-    const open = (i) => {
-      cur = i; render(); lastFocus = document.activeElement;
-      lb.classList.add("is-open"); lb.setAttribute("aria-hidden", "false");
+    const openLightbox = (index) => {
+      visibleWorks = [...works].filter((w) => !w.classList.contains("is-hidden"));
+      current = index;
+      showLightbox();
+      lastFocus = document.activeElement;
+      lb.classList.add("is-open");
+      lb.setAttribute("aria-hidden", "false");
       document.body.classList.add("lb-open");
       document.body.style.overflow = "hidden";
       lb.querySelector("[data-lb-close]").focus();
     };
-    const close = () => {
-      lb.classList.remove("is-open"); lb.setAttribute("aria-hidden", "true");
+    const closeLightbox = () => {
+      lb.classList.remove("is-open");
+      lb.setAttribute("aria-hidden", "true");
       document.body.classList.remove("lb-open");
       document.body.style.overflow = "";
       if (lastFocus) lastFocus.focus();
     };
-    const move = (dir) => { cur = (cur + dir + items.length) % items.length; render(); };
+    const move = (dir) => { current = (current + dir + visibleWorks.length) % visibleWorks.length; showLightbox(); };
 
-    items.forEach((btn, i) => btn.addEventListener("click", () => open(i)));
-    lb.querySelector("[data-lb-close]").addEventListener("click", close);
+    works.forEach((w) => w.addEventListener("click", () => {
+      const list = [...works].filter((el) => !el.classList.contains("is-hidden"));
+      openLightbox(list.indexOf(w));
+    }));
+    lb.querySelector("[data-lb-close]").addEventListener("click", closeLightbox);
     lb.querySelector("[data-lb-prev]").addEventListener("click", () => move(-1));
     lb.querySelector("[data-lb-next]").addEventListener("click", () => move(1));
-    lb.addEventListener("click", (e) => { if (e.target === lb && !squelchClick) close(); });
+    // o clique sintético pós-arrasto não pode fechar o lightbox
+    lb.addEventListener("pointerdown", (e) => { swipeX = e.clientX; squelchClick = false; });
+    lb.addEventListener("pointerup", (e) => {
+      if (swipeX === null) return;
+      const dx = e.clientX - swipeX;
+      if (Math.abs(dx) > 10) squelchClick = true;
+      if (Math.abs(dx) > 60) move(dx > 0 ? -1 : 1);
+      swipeX = null;
+    });
+    lb.addEventListener("click", (e) => { if (e.target === lb && !squelchClick) closeLightbox(); });
     document.addEventListener("keydown", (e) => {
       if (!lb.classList.contains("is-open")) return;
-      if (e.key === "Escape") close();
+      if (e.key === "Escape") closeLightbox();
       if (e.key === "ArrowLeft") move(-1);
       if (e.key === "ArrowRight") move(1);
       // aria-modal: prende o Tab nos controles do lightbox
@@ -337,19 +234,18 @@ document.addEventListener("DOMContentLoaded", () => {
         foci[next < 0 ? foci.length - 1 : next].focus();
       }
     });
-    // swipe (o clique sintético pós-arrasto não pode fechar o lightbox)
-    let squelchClick = false;
-    lb.addEventListener("pointerdown", (e) => { swipeX = e.clientX; squelchClick = false; });
-    lb.addEventListener("pointerup", (e) => {
-      if (swipeX === null) return;
-      const dx = e.clientX - swipeX;
-      if (Math.abs(dx) > 10) squelchClick = true;
-      if (Math.abs(dx) > 60) move(dx > 0 ? -1 : 1);
-      swipeX = null;
-    });
   }
 
-  /* ---------- 12. Formulário: validação inline + envio ---------- */
+  /* ---------- 10. Voltar ao topo ---------- */
+  const toTop = document.querySelector("[data-to-top]");
+  if (toTop) {
+    const toggleTop = () => toTop.classList.toggle("is-visible", window.scrollY > 600);
+    toggleTop();
+    window.addEventListener("scroll", toggleTop, { passive: true });
+    toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: SCROLL_BEHAVIOR }));
+  }
+
+  /* ---------- 11. Formulário: validação inline + envio ---------- */
   const form = document.querySelector("[data-form]");
   const status = document.querySelector("[data-form-status]");
   const submitBtn = document.querySelector("[data-submit]");
@@ -381,15 +277,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function validate() {
       let ok = true, first = null;
-      const req = [form.elements.name, form.elements.email, form.elements.message];
-      req.forEach((inp) => {
-        if (!inp.value.trim()) {
+      [form.elements.name, form.elements.email, form.elements.message].forEach((inp) => {
+        if (inp && !inp.value.trim()) {
           setErr(inp, T("form.errReq", "Required field"));
           ok = false; first = first || inp;
         }
       });
       const email = form.elements.email;
-      if (email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+      if (email && email.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
         setErr(email, T("form.errEmail", "Enter a valid email"));
         ok = false; first = first || email;
       }
@@ -397,10 +292,12 @@ document.addEventListener("DOMContentLoaded", () => {
       return ok;
     }
 
+    let sending = false; // evita envio duplo (Enter repetido durante o fetch)
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      if (sending) return;
       status.textContent = "";
-      status.className = "form-status mono";
+      status.className = "form-status";
       if (form.elements._gotcha && form.elements._gotcha.value) return; // honeypot
       if (!validate()) return;
 
@@ -418,10 +315,12 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      sending = true;
       submitBtn.classList.add("is-loading");
-      const label = submitBtn.querySelector("span:not(.btn__fill)");
-      const original = label.textContent;
-      label.textContent = T("form.sending", "Sending...");
+      submitBtn.disabled = true;
+      const label = submitBtn.querySelector("span");
+      const original = label ? label.textContent : "";
+      if (label) label.textContent = T("form.sending", "Sending...");
 
       try {
         const data = new FormData(form);
@@ -434,22 +333,21 @@ document.addEventListener("DOMContentLoaded", () => {
         const ok = useW3 ? ((await res.json().catch(() => ({}))).success === true) : res.ok;
         if (!ok) throw new Error("Send failed");
         form.reset();
-        status.textContent = T("form.statusOk", "✓ Request sent — we'll reply within one business day.");
+        status.textContent = T("form.statusOk", "✅ Message sent! We'll be in touch soon.");
         status.classList.add("is-ok");
       } catch (err) {
-        status.textContent = T("form.statusErr", "✕ Couldn't send right now. Please try again or reach us on WhatsApp.");
+        status.textContent = T("form.statusErr", "❌ Couldn't send right now. Please try again or reach us on WhatsApp.");
         status.classList.add("is-err");
       } finally {
+        sending = false;
         submitBtn.classList.remove("is-loading");
-        label.textContent = original;
+        submitBtn.disabled = false;
+        if (label) label.textContent = original;
       }
     });
   }
 
-  /* ---------- 13. Ano atual no rodapé ---------- */
+  /* ---------- 12. Ano atual no rodapé ---------- */
   const yearEl = document.querySelector("[data-year]");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  /* inicia o loop de animação (progresso, drift, prévia) */
-  requestAnimationFrame(onScrollFrame);
 });

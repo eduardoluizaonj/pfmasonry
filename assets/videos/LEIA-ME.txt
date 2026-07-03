@@ -1,14 +1,15 @@
 VÍDEOS / REELS DO CLIENTE
 =========================
 
-No layout atual ("Atelier Stone"), a seção 06 — On site mostra um trilho
-horizontal de cards 9:16 que hoje usam FOTOS como capa e apontam para o
-perfil do Instagram (placeholder @pfmasonry — ⚠️ confirmar o usuário real).
+A seção "Instagram" do site mostra um trilho horizontal de cards 9:16
+(.reel-card no index.html) que hoje usam FOTOS como capa, com o selo
+"Vídeo em breve", mais um card final de "Seguir" apontando para o perfil
+(placeholder @pfmasonry — ⚠️ confirmar o usuário real).
 
 Quando os reels do cliente chegarem, há duas opções (me avise que eu aplico):
 
 1. MAIS SIMPLES — apontar cada card para o link do reel no Instagram
-   (basta trocar o href de cada .rail__card no index.html e usar um
+   (transformar cada .reel-card em <a href="link-do-reel"> e usar um
    frame do vídeo como capa).
 
 2. VÍDEO NO PRÓPRIO SITE — salvar os arquivos .mp4 (9:16, H.264,

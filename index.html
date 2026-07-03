@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <!--
   ============================================================================
-  PF CONSTRUCTION MASONRY — Site institucional (página única, estático, trilíngue)
+  PF CONSTRUCTION MASONRY — Site institucional "Atelier Stone"
+  (página única, estático, trilíngue EN/PT/ES)
   ----------------------------------------------------------------------------
   Personalização (detalhes no README.md):
-   • Textos (PT/EN/ES): assets/js/i18n.js  (um dicionário só)
+   • Textos (EN/PT/ES): assets/js/i18n.js  (um dicionário só)
    • WhatsApp e e-mail (Web3Forms): bloco CONFIG no topo de assets/js/main.js
    • Telefone, endereço, redes: procure "⚠️ TROCAR" abaixo
    • Cores: variáveis :root no topo de assets/css/styles.css
    • Fotos: troque os arquivos em assets/img/ mantendo os nomes
   ============================================================================
 -->
-<html lang="en">
+<html lang="en" id="top">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,7 +22,7 @@
 
   <title>PF Construction Masonry — Masonry, Pavers &amp; Concrete in Monmouth County, NJ</title>
   <meta name="description" content="Masonry specialists in Long Branch, NJ: pavers, brick, concrete, stone, tile, sidewalks, curbs and foundations. Serving all of Monmouth County." />
-  <meta name="theme-color" content="#15171b" />
+  <meta name="theme-color" content="#F6F3EE" />
   <link rel="canonical" href="https://www.pfmasonry.com/" />
 
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
@@ -30,470 +31,620 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="PF Construction Masonry — Masonry, Pavers &amp; Concrete in Monmouth County, NJ" />
   <meta property="og:description" content="Pavers, brick, concrete, stone, tile, sidewalks, curbs and foundations. Quality masonry serving Long Branch and all of Monmouth County, NJ." />
-  <meta property="og:image" content="assets/img/hero.jpg" />
+  <meta property="og:image" content="https://www.pfmasonry.com/assets/img/hero.jpg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="preload" as="image" href="assets/img/hero.jpg" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,460;0,9..144,600;1,9..144,460&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/img/hero.jpg" fetchpriority="high" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
 
-  <!-- ====================== CABEÇALHO / MENU ====================== -->
-  <header class="site-header" id="topo" data-header>
-    <div class="container site-header__inner">
-      <a class="logo" href="#topo" aria-label="PF Construction Masonry">
-        <img class="logo__full logo__full--light" src="assets/img/header-logo-white.png" alt="PF Construction Masonry" />
-        <img class="logo__full logo__full--dark" src="assets/img/header-logo.png" alt="PF Construction Masonry" />
-      </a>
+  <!-- Linha de progresso de rolagem ("costura de argamassa") -->
+  <div class="seam" data-seam aria-hidden="true"></div>
 
-      <nav class="nav" id="menu" aria-label="Main menu">
-        <a href="#servicos" class="nav__link" data-i18n="nav.services">Services</a>
-        <a href="#instagram" class="nav__link" data-i18n="reels.eyebrow">Instagram</a>
-        <a href="#sobre" class="nav__link" data-i18n="nav.about">About</a>
-        <a href="#processo" class="nav__link" data-i18n="nav.process">How it works</a>
-        <a href="#obras" class="nav__link" data-i18n="nav.works">Projects</a>
-        <a href="#depoimentos" class="nav__link" data-i18n="nav.testimonials">Reviews</a>
-        <a href="#contato" class="nav__link" data-i18n="nav.contact">Contact</a>
-        <div class="lang-switch" role="group" data-i18n-aria="aria.lang" aria-label="Select language">
+  <!-- ====================== CABEÇALHO (estado A, no fluxo) ====================== -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="#top" aria-label="PF Construction Masonry">
+        <img src="assets/img/header-logo.png" alt="PF Construction Masonry" height="30" />
+      </a>
+      <nav class="nav" aria-label="Main menu">
+        <a class="nav__link" href="#servicos" data-i18n="nav.services">Services</a>
+        <a class="nav__link" href="#sobre" data-i18n="nav.about">About</a>
+        <a class="nav__link" href="#processo" data-i18n="nav.process">Process</a>
+        <a class="nav__link" href="#obras" data-i18n="nav.works">Work</a>
+        <a class="nav__link" href="#contato" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <div class="site-header__tools">
+        <div class="lang" role="group" data-i18n-aria="aria.lang" aria-label="Select language">
           <button type="button" data-lang="en">EN</button>
           <button type="button" data-lang="pt">PT</button>
           <button type="button" data-lang="es">ES</button>
         </div>
-        <a href="#contato" class="btn btn--primary btn--sm nav__cta" data-i18n="nav.cta">Free estimate</a>
-      </nav>
-
-      <button class="nav-toggle" data-i18n-aria="aria.menu" aria-label="Open menu" aria-expanded="false" aria-controls="menu" data-nav-toggle>
-        <span></span><span></span><span></span>
-      </button>
+        <a href="#contato" class="btn btn--red btn--sm" data-i18n="nav.cta">Get an estimate</a>
+        <button class="burger" data-menu-open data-i18n-aria="aria.menu" aria-label="Open menu" aria-expanded="false" aria-controls="m-menu">
+          <span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
+
+  <!-- Cabeçalho fixo (estado B, aparece após rolar) -->
+  <div class="dockbar" data-dockbar aria-label="Quick navigation">
+    <div class="container dockbar__inner">
+      <a class="logo" href="#top" aria-label="PF Construction Masonry">
+        <img src="assets/img/header-logo.png" alt="" height="22" />
+      </a>
+      <nav class="nav nav--dock" aria-label="Quick menu">
+        <a class="nav__link" href="#servicos" data-i18n="nav.services">Services</a>
+        <a class="nav__link" href="#sobre" data-i18n="nav.about">About</a>
+        <a class="nav__link" href="#processo" data-i18n="nav.process">Process</a>
+        <a class="nav__link" href="#obras" data-i18n="nav.works">Work</a>
+        <a class="nav__link" href="#contato" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <div class="site-header__tools">
+        <a href="#contato" class="btn btn--red btn--xs" data-i18n="nav.cta">Get an estimate</a>
+        <button class="burger" data-menu-open data-i18n-aria="aria.menu" aria-label="Open menu" aria-expanded="false" aria-controls="m-menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu mobile (overlay de tela cheia) -->
+  <div class="m-menu" id="m-menu" data-menu aria-hidden="true">
+    <div class="m-menu__top">
+      <img src="assets/img/header-logo.png" alt="" height="26" />
+      <button class="m-menu__close" data-menu-close data-i18n-aria="aria.close" aria-label="Close menu">×</button>
+    </div>
+    <nav class="m-menu__nav" aria-label="Mobile menu">
+      <a href="#servicos" data-i18n="nav.services">Services</a>
+      <a href="#sobre" data-i18n="nav.about">About</a>
+      <a href="#processo" data-i18n="nav.process">Process</a>
+      <a href="#obras" data-i18n="nav.works">Work</a>
+      <a href="#instagram" data-i18n="reels.eyebrow">Instagram</a>
+      <a href="#contato" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <div class="m-menu__foot">
+      <div class="lang" role="group" data-i18n-aria="aria.lang" aria-label="Select language">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+        <button type="button" data-lang="es">ES</button>
+      </div>
+      <a href="#contato" class="btn btn--red btn--block" data-i18n="nav.cta">Get an estimate</a>
+    </div>
+  </div>
 
   <main>
 
     <!-- ====================== HERO ====================== -->
     <section class="hero" id="inicio">
-      <img class="hero__img" src="assets/img/hero.jpg" alt="Paver patio with stone wall" fetchpriority="high" />
-      <div class="hero__overlay"></div>
-      <div class="container hero__content">
-        <p class="eyebrow eyebrow--light reveal" data-i18n="hero.eyebrow">Masonry • Pavers • Concrete</p>
-        <h1 class="hero__title reveal" data-i18n-html="hero.title">Masonry work built to <span class="hl">last</span> for generations.</h1>
-        <p class="hero__subtitle reveal" data-i18n="hero.subtitle">Pavers, brick, concrete, stone, tile, sidewalks, curbs and foundations — solid craftsmanship serving Long Branch and all of Monmouth County, NJ.</p>
-        <div class="hero__actions reveal">
-          <a href="#contato" class="btn btn--primary btn--lg js-whatsapp">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.16c-.25.69-1.45 1.32-1.99 1.36-.53.04-.53.42-3.34-.7-2.81-1.12-4.57-3.97-4.71-4.16-.14-.19-1.13-1.5-1.13-2.86 0-1.36.71-2.03.97-2.31.25-.28.55-.35.74-.35.18 0 .37 0 .53.01.17.01.4-.06.62.48.25.59.83 2.03.9 2.18.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.16-.29.37-.42.49-.14.14-.28.29-.12.57.17.28.74 1.22 1.59 1.98 1.1.98 2.02 1.28 2.3 1.43.28.14.45.12.61-.07.17-.19.71-.83.9-1.11.18-.28.37-.23.62-.14.25.09 1.61.76 1.89.9.28.14.46.21.53.32.07.12.07.66-.18 1.3Z"/></svg>
-            <span data-i18n="hero.btnWhats">Chat on WhatsApp</span>
-          </a>
-          <a href="#obras" class="btn btn--ghost btn--lg" data-i18n="hero.btnWorks">See our work</a>
+      <div class="container">
+        <div class="hero__eyebrow" data-anim="rise">
+          <span class="sq" aria-hidden="true"></span>
+          <span class="mono" data-i18n="hero.eyebrow">Masonry contractor — Monmouth County, NJ</span>
+          <span class="rule hero__eyebrow-rule" data-anim="rule" aria-hidden="true"></span>
         </div>
-        <p class="hero__trust reveal" data-i18n="hero.trust">Serving Monmouth County, NJ · Free estimates · Quality craftsmanship</p>
+        <h1 class="hero__title" data-anim="lift">
+          <span class="mask"><span class="line line-1" data-i18n="hero.line1">Built by hand.</span></span>
+          <span class="mask mask--indent"><span class="line line-2"><span data-i18n="hero.line2">Made to last</span><span class="dot">.</span></span></span>
+        </h1>
+        <div class="hero__meta mono" data-anim="rise">
+          <span>40.3043° N / 73.9924° W — LONG BRANCH, NJ</span>
+          <span data-i18n="hero.meta2">Pavers · Brick · Stone · Concrete</span>
+          <span data-i18n="hero.meta3">Est. 10+ years of craft</span>
+        </div>
       </div>
-      <a href="#numeros" class="hero__scroll" aria-label="Scroll down"><span></span></a>
+      <div class="container hero__split">
+        <div class="hero__copy" data-anim="rise">
+          <p class="hero__sub" data-i18n="hero.sub">Pavers, brick, concrete, stone, tile, sidewalks and foundations — solid craftsmanship for homes and businesses across Monmouth County.</p>
+          <div class="hero__actions">
+            <a href="#contato" class="btn btn--red btn--brick js-whatsapp">
+              <span class="btn__fill" aria-hidden="true"><i></i><i></i><i></i></span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.16c-.25.69-1.45 1.32-1.99 1.36-.53.04-.53.42-3.34-.7-2.81-1.12-4.57-3.97-4.71-4.16-.14-.19-1.13-1.5-1.13-2.86 0-1.36.71-2.03.97-2.31.25-.28.55-.35.74-.35.18 0 .37 0 .53.01.17.01.4-.06.62.48.25.59.83 2.03.9 2.18.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.16-.29.37-.42.49-.14.14-.28.29-.12.57.17.28.74 1.22 1.59 1.98 1.1.98 2.02 1.28 2.3 1.43.28.14.45.12.61-.07.17-.19.71-.83.9-1.11.18-.28.37-.23.62-.14.25.09 1.61.76 1.89.9.28.14.46.21.53.32.07.12.07.66-.18 1.3Z"/></svg>
+              <span data-i18n="hero.btnWhats">WhatsApp us</span>
+            </a>
+            <a href="#obras" class="link-ink" data-i18n="hero.btnWorks">View our work ↓</a>
+          </div>
+        </div>
+        <figure class="hero__media">
+          <div class="frame" data-anim="chisel"><img src="assets/img/hero.jpg" alt="Paver patio with stone retaining wall" fetchpriority="high" decoding="async" /></div>
+          <figcaption class="cap mono" data-anim="rise"><span data-i18n="hero.caption">Paver patio + retaining wall</span><span>LONG BRANCH, NJ</span></figcaption>
+        </figure>
+      </div>
     </section>
 
-    <!-- ====================== NÚMEROS ====================== -->
+    <!-- Faixa marquee com os 7 serviços -->
+    <div class="ticker" data-ticker aria-hidden="false">
+      <div class="ticker__track" data-ticker-track>
+        <span class="mono" data-i18n="svc1.t">Pavers</span><span class="sq"></span>
+        <span class="mono" data-i18n="svc2.t">Brick</span><span class="sq"></span>
+        <span class="mono" data-i18n="svc3.t">Concrete</span><span class="sq"></span>
+        <span class="mono" data-i18n="svc4.t">Stone</span><span class="sq"></span>
+        <span class="mono" data-i18n="svc5.t">Tile</span><span class="sq"></span>
+        <span class="mono" data-i18n="svc6.t">Sidewalk &amp; Curb</span><span class="sq"></span>
+        <span class="mono" data-i18n="svc7.t">Foundation</span><span class="sq"></span>
+      </div>
+    </div>
+
+    <!-- ====================== 01 — NÚMEROS ====================== -->
     <!-- ⚠️ TROCAR: confirme os números com o cliente (data-count) -->
-    <section class="stats" id="numeros" aria-label="Our numbers">
-      <div class="container stats__grid">
-        <div class="stat reveal">
-          <div class="stat__num"><span data-count="10">0</span><span class="stat__suffix">+</span></div>
-          <div class="stat__label" data-i18n="stat1">Years of experience</div>
+    <section class="section record" id="numeros">
+      <div class="container">
+        <div class="sec-head" data-anim="rise">
+          <span class="mono sec-idx" data-i18n="record.idx">01 — Record</span>
+          <span class="rule" data-anim="rule" aria-hidden="true"></span>
         </div>
-        <div class="stat reveal">
-          <div class="stat__num"><span data-count="300">0</span><span class="stat__suffix">+</span></div>
-          <div class="stat__label" data-i18n="stat2">Projects completed</div>
-        </div>
-        <div class="stat reveal">
-          <div class="stat__num"><span data-count="100">0</span><span class="stat__suffix">k+</span></div>
-          <div class="stat__label" data-i18n="stat3">sq ft built</div>
-        </div>
-        <div class="stat reveal">
-          <div class="stat__num"><span data-count="100">0</span><span class="stat__suffix">%</span></div>
-          <div class="stat__label" data-i18n="stat4">Happy clients</div>
+        <div class="record__grid" data-anim-group>
+          <div class="record__cell" data-anim="rise">
+            <div class="record__num"><span data-count="10" data-anim="tally">10</span><sup>+</sup></div>
+            <span class="record__bar" aria-hidden="true"></span>
+            <span class="mono record__label" data-i18n="stat1">Years of craft</span>
+          </div>
+          <div class="record__cell" data-anim="rise">
+            <div class="record__num"><span data-count="300" data-anim="tally">300</span><sup>+</sup></div>
+            <span class="record__bar" aria-hidden="true"></span>
+            <span class="mono record__label" data-i18n="stat2">Projects completed</span>
+          </div>
+          <div class="record__cell" data-anim="rise">
+            <div class="record__num"><span data-count="100" data-anim="tally">100</span><sup>k+</sup></div>
+            <span class="record__bar" aria-hidden="true"></span>
+            <span class="mono record__label" data-i18n="stat3">Sq ft installed</span>
+          </div>
+          <div class="record__cell" data-anim="rise">
+            <div class="record__num"><span data-count="100" data-anim="tally">100</span><sup>%</sup></div>
+            <span class="record__bar" aria-hidden="true"></span>
+            <span class="mono record__label" data-i18n="stat4">Happy clients</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ====================== SERVIÇOS ====================== -->
-    <section class="section" id="servicos">
+    <!-- ====================== 02 — SERVIÇOS ====================== -->
+    <section class="section services" id="servicos">
       <div class="container">
-        <div class="section__head">
-          <p class="eyebrow reveal" data-i18n="services.eyebrow">What we do</p>
-          <h2 class="section__title reveal" data-i18n="services.title">Complete masonry solutions</h2>
-          <p class="section__lead reveal" data-i18n="services.lead">From the foundation to the finishing touches, we handle every step of your masonry project.</p>
+        <div class="sec-head" data-anim="rise">
+          <span class="mono sec-idx" data-i18n="services.idx">02 — Services</span>
+          <span class="rule" data-anim="rule" aria-hidden="true"></span>
+          <span class="sec-note" data-i18n="services.note">Seven trades. One standard.</span>
         </div>
+        <h2 class="h2" data-anim="rise" data-i18n="services.title">What we build</h2>
 
-        <div class="cards">
-          <article class="card reveal">
-            <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18M3 14h18M8 4v5M14 9v5M9 14v6"/></svg></div>
-            <h3 class="card__title" data-i18n="svc1.t">Pavers</h3>
-            <p class="card__text" data-i18n="svc1.d">Paver driveways, patios and walkways installed with precision — beautiful, durable and built to drain right.</p>
-          </article>
-          <article class="card reveal">
-            <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 9.7h18M3 14.3h18M9 5v4.7M15 5v4.7M6 9.7v4.6M12 9.7v4.6M18 9.7v4.6M9 14.3V19M15 14.3V19"/></svg></div>
-            <h3 class="card__title" data-i18n="svc2.t">Brick</h3>
-            <p class="card__text" data-i18n="svc2.d">Brick walls, veneer, steps and repairs — classic brickwork with clean, even joints that last.</p>
-          </article>
-          <article class="card reveal">
-            <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4Z"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4"/></svg></div>
-            <h3 class="card__title" data-i18n="svc3.t">Concrete</h3>
-            <p class="card__text" data-i18n="svc3.d">Driveways, slabs, steps and flatwork — properly graded, reinforced and finished concrete.</p>
-          </article>
-          <article class="card reveal">
-            <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M8 3 3 8l2 8 6 4 8-3 2-7-6-6-7-1Z"/><path d="M8 3l3 6-6 7M11 9l8-1M11 9l2 11"/></svg></div>
-            <h3 class="card__title" data-i18n="svc4.t">Stone</h3>
-            <p class="card__text" data-i18n="svc4.d">Natural stone walls, veneer and accents that bring timeless character to your home.</p>
-          </article>
-          <article class="card reveal">
-            <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg></div>
-            <h3 class="card__title" data-i18n="svc5.t">Tile</h3>
-            <p class="card__text" data-i18n="svc5.d">Tile installation done right — level, aligned and sealed, indoors and out.</p>
-          </article>
-          <article class="card reveal">
-            <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 3 4 21M15 3l5 18M7.5 8.5h9M6.3 14h11.4M5 19.5h14"/></svg></div>
-            <h3 class="card__title" data-i18n="svc6.t">Sidewalk &amp; Curb</h3>
-            <p class="card__text" data-i18n="svc6.d">Sidewalks and curbs built or replaced to code — smooth, safe and up to township standards.</p>
-          </article>
-          <article class="card reveal">
-            <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 21h18M5 21v-3h14v3"/><path d="M7 18v-6l5-4 5 4v6"/></svg></div>
-            <h3 class="card__title" data-i18n="svc7.t">Foundation</h3>
-            <p class="card__text" data-i18n="svc7.d">Footings, foundations and structural repairs — the solid base every project depends on.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================== INSTAGRAM / REELS ====================== -->
-    <section class="section section--alt reels" id="instagram">
-      <div class="container">
-        <div class="section__head">
-          <p class="eyebrow reveal" data-i18n="reels.eyebrow">Instagram</p>
-          <h2 class="section__title reveal" data-i18n="reels.title">See our work in action</h2>
-          <p class="section__lead reveal" data-i18n="reels.lead">Behind-the-scenes, before &amp; after and finished projects — follow us on Instagram.</p>
-        </div>
-
-        <div class="reels__stage reveal">
-          <button class="reels__nav reels__nav--prev" data-reel-prev data-i18n-aria="reels.prev" aria-label="Previous video">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
-          </button>
-
-          <div class="phone">
-            <div class="phone__screen" data-reels>
-              <div class="phone__progress" data-reels-progress aria-hidden="true"></div>
-              <!-- Vídeos verticais do cliente: assets/videos/reel-1.mp4 ... reel-6.mp4
-                   (poster = foto só enquanto o vídeo carrega). Quando os vídeos
-                   chegarem, mude REELS_READY para true em assets/js/main.js. -->
-              <article class="reel is-active" data-reel><video class="reel__video" poster="assets/img/obra-1.jpg" muted loop playsinline preload="none"><source data-src="assets/videos/reel-1.mp4" type="video/mp4"></video></article>
-              <article class="reel" data-reel><video class="reel__video" poster="assets/img/obra-2.jpg" muted loop playsinline preload="none"><source data-src="assets/videos/reel-2.mp4" type="video/mp4"></video></article>
-              <article class="reel" data-reel><video class="reel__video" poster="assets/img/obra-3.jpg" muted loop playsinline preload="none"><source data-src="assets/videos/reel-3.mp4" type="video/mp4"></video></article>
-              <article class="reel" data-reel><video class="reel__video" poster="assets/img/obra-4.jpg" muted loop playsinline preload="none"><source data-src="assets/videos/reel-4.mp4" type="video/mp4"></video></article>
-              <article class="reel" data-reel><video class="reel__video" poster="assets/img/obra-5.jpg" muted loop playsinline preload="none"><source data-src="assets/videos/reel-5.mp4" type="video/mp4"></video></article>
-              <article class="reel" data-reel><video class="reel__video" poster="assets/img/obra-6.jpg" muted loop playsinline preload="none"><source data-src="assets/videos/reel-6.mp4" type="video/mp4"></video></article>
-
-              <!-- Selo de placeholder (some quando há vídeo) -->
-              <div class="reel__soon" data-reels-soon>
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-                <span data-i18n="reels.soon">Video coming soon</span>
-              </div>
-
-              <!-- UI fixa do Instagram -->
-              <div class="ig-top">
-                <img class="ig-pfp" src="assets/img/favicon.png" alt="" />
-                <!-- ⚠️ TROCAR: usuário do Instagram (aqui, no i18n.js e nos 2 links abaixo) -->
-                <span class="ig-user">@<span data-i18n="reels.handle">pfmasonry</span></span>
-                <a class="ig-follow" href="https://www.instagram.com/pfmasonry/" target="_blank" rel="noopener" data-i18n="reels.follow">Follow</a>
-              </div>
-              <div class="ig-actions">
-                <span class="ig-act" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.5-1.5 3-3.3 3-5.5A4.5 4.5 0 0 0 12 5 4.5 4.5 0 0 0 2 8.5c0 2.2 1.5 4 3 5.5l7 7Z"/></svg><b>1.2k</b></span>
-                <span class="ig-act" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5Z"/></svg><b>89</b></span>
-                <span class="ig-act" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/></svg></span>
-              </div>
+        <div class="svc-list" data-anim-group>
+          <!-- Cada linha leva ao formulário com o serviço pré-selecionado (data-service = value do <select>) -->
+          <div class="svc" data-anim="rise">
+            <a class="svc__row" href="#contato" data-service="Pavers" data-preview="assets/img/obra-1.jpg">
+              <span class="mono svc__idx">01</span>
+              <span class="svc__name" data-i18n="svc1.t">Pavers</span>
+              <span class="svc__desc" data-i18n="svc1.d">Driveways, patios and walkways installed with precision — durable and built to drain right.</span>
+              <span class="svc__arrow" aria-hidden="true"></span>
+            </a>
+            <div class="svc__panel">
+              <p data-i18n="svc1.d">Driveways, patios and walkways installed with precision — durable and built to drain right.</p>
+              <img src="assets/img/obra-1.jpg" alt="" loading="lazy" decoding="async" />
+              <a class="link-ink" href="#contato" data-service="Pavers" data-i18n="nav.cta">Get an estimate</a>
             </div>
           </div>
-
-          <button class="reels__nav reels__nav--next" data-reel-next data-i18n-aria="reels.next" aria-label="Next video">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-        </div>
-
-        <div class="reels__cta reveal">
-          <a class="btn btn--dark" href="https://www.instagram.com/pfmasonry/" target="_blank" rel="noopener" data-i18n="reels.btn">View on Instagram</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================== SOBRE ====================== -->
-    <section class="section" id="sobre">
-      <div class="container about">
-        <div class="about__media reveal">
-          <img class="about__img-main" src="assets/img/about-team.jpg" alt="Mason laying a block wall" loading="lazy" />
-          <img class="about__img-sub" src="assets/img/about-work.jpg" alt="Brickwork detail" loading="lazy" />
-          <!-- ⚠️ TROCAR: confirme os anos de experiência -->
-          <div class="about__badge">
-            <strong>10+</strong>
-            <span data-i18n="about.badge">years building strong</span>
+          <div class="svc" data-anim="rise">
+            <a class="svc__row" href="#contato" data-service="Brick" data-preview="assets/img/about-work.jpg">
+              <span class="mono svc__idx">02</span>
+              <span class="svc__name" data-i18n="svc2.t">Brick</span>
+              <span class="svc__desc" data-i18n="svc2.d">Walls, veneer, steps and repairs — classic brickwork with clean, even joints.</span>
+              <span class="svc__arrow" aria-hidden="true"></span>
+            </a>
+            <div class="svc__panel">
+              <p data-i18n="svc2.d">Walls, veneer, steps and repairs — classic brickwork with clean, even joints.</p>
+              <img src="assets/img/about-work.jpg" alt="" loading="lazy" decoding="async" />
+              <a class="link-ink" href="#contato" data-service="Brick" data-i18n="nav.cta">Get an estimate</a>
+            </div>
+          </div>
+          <div class="svc" data-anim="rise">
+            <a class="svc__row" href="#contato" data-service="Concrete" data-preview="assets/img/obra-4.jpg">
+              <span class="mono svc__idx">03</span>
+              <span class="svc__name" data-i18n="svc3.t">Concrete</span>
+              <span class="svc__desc" data-i18n="svc3.d">Driveways, slabs, steps and flatwork — graded, reinforced and finished right.</span>
+              <span class="svc__arrow" aria-hidden="true"></span>
+            </a>
+            <div class="svc__panel">
+              <p data-i18n="svc3.d">Driveways, slabs, steps and flatwork — graded, reinforced and finished right.</p>
+              <img src="assets/img/obra-4.jpg" alt="" loading="lazy" decoding="async" />
+              <a class="link-ink" href="#contato" data-service="Concrete" data-i18n="nav.cta">Get an estimate</a>
+            </div>
+          </div>
+          <div class="svc" data-anim="rise">
+            <a class="svc__row" href="#contato" data-service="Stone" data-preview="assets/img/obra-3.jpg">
+              <span class="mono svc__idx">04</span>
+              <span class="svc__name" data-i18n="svc4.t">Stone</span>
+              <span class="svc__desc" data-i18n="svc4.d">Natural stone walls, veneer and accents with timeless character.</span>
+              <span class="svc__arrow" aria-hidden="true"></span>
+            </a>
+            <div class="svc__panel">
+              <p data-i18n="svc4.d">Natural stone walls, veneer and accents with timeless character.</p>
+              <img src="assets/img/obra-3.jpg" alt="" loading="lazy" decoding="async" />
+              <a class="link-ink" href="#contato" data-service="Stone" data-i18n="nav.cta">Get an estimate</a>
+            </div>
+          </div>
+          <div class="svc" data-anim="rise">
+            <a class="svc__row" href="#contato" data-service="Tile" data-preview="assets/img/obra-5.jpg">
+              <span class="mono svc__idx">05</span>
+              <span class="svc__name" data-i18n="svc5.t">Tile</span>
+              <span class="svc__desc" data-i18n="svc5.d">Tile installation done right — level, aligned and sealed, indoors and out.</span>
+              <span class="svc__arrow" aria-hidden="true"></span>
+            </a>
+            <div class="svc__panel">
+              <p data-i18n="svc5.d">Tile installation done right — level, aligned and sealed, indoors and out.</p>
+              <img src="assets/img/obra-5.jpg" alt="" loading="lazy" decoding="async" />
+              <a class="link-ink" href="#contato" data-service="Tile" data-i18n="nav.cta">Get an estimate</a>
+            </div>
+          </div>
+          <div class="svc" data-anim="rise">
+            <a class="svc__row" href="#contato" data-service="Sidewalk / Curb" data-preview="assets/img/obra-6.jpg">
+              <span class="mono svc__idx">06</span>
+              <span class="svc__name" data-i18n="svc6.t">Sidewalk &amp; Curb</span>
+              <span class="svc__desc" data-i18n="svc6.d">Built or replaced to code — smooth, safe and up to township standards.</span>
+              <span class="svc__arrow" aria-hidden="true"></span>
+            </a>
+            <div class="svc__panel">
+              <p data-i18n="svc6.d">Built or replaced to code — smooth, safe and up to township standards.</p>
+              <img src="assets/img/obra-6.jpg" alt="" loading="lazy" decoding="async" />
+              <a class="link-ink" href="#contato" data-service="Sidewalk / Curb" data-i18n="nav.cta">Get an estimate</a>
+            </div>
+          </div>
+          <div class="svc" data-anim="rise">
+            <a class="svc__row" href="#contato" data-service="Foundation" data-preview="assets/img/about-team.jpg">
+              <span class="mono svc__idx">07</span>
+              <span class="svc__name" data-i18n="svc7.t">Foundation</span>
+              <span class="svc__desc" data-i18n="svc7.d">Footings, foundations and structural repairs — the base everything depends on.</span>
+              <span class="svc__arrow" aria-hidden="true"></span>
+            </a>
+            <div class="svc__panel">
+              <p data-i18n="svc7.d">Footings, foundations and structural repairs — the base everything depends on.</p>
+              <img src="assets/img/about-team.jpg" alt="" loading="lazy" decoding="async" />
+              <a class="link-ink" href="#contato" data-service="Foundation" data-i18n="nav.cta">Get an estimate</a>
+            </div>
           </div>
         </div>
-        <div class="about__content">
-          <p class="eyebrow reveal" data-i18n="about.eyebrow">About us</p>
-          <h2 class="section__title reveal" data-i18n="about.title">Masonry specialists who take pride in every wall</h2>
-          <p class="reveal" data-i18n="about.p1">PF Construction Masonry is based in Long Branch, NJ, serving homes and businesses across Monmouth County. From pavers and brick to concrete, stone, tile and foundations, we build it solid — and we build it right.</p>
-          <p class="reveal" data-i18n="about.p2">From the first estimate to the final cleanup, you deal directly with us — clear pricing, quality materials and craftsmanship that stands the test of time.</p>
-          <ul class="checklist reveal">
-            <li data-i18n="about.c1">Skilled, experienced crew</li>
-            <li data-i18n="about.c2">Quality materials</li>
-            <li data-i18n="about.c3">On-time, clean job sites</li>
-            <li data-i18n="about.c4">Clear estimates, no surprises</li>
+      </div>
+      <!-- Prévia de imagem que segue o cursor (desktop) -->
+      <div class="svc-preview" data-svc-preview aria-hidden="true"><img src="" alt="" /></div>
+    </section>
+
+    <!-- ====================== 03 — SOBRE ====================== -->
+    <section class="section about" id="sobre">
+      <div class="container about__grid">
+        <div class="about__sticky">
+          <div class="sec-head" data-anim="rise">
+            <span class="mono sec-idx" data-i18n="about.idx">03 — About</span>
+            <span class="rule" data-anim="rule" aria-hidden="true"></span>
+          </div>
+          <h2 class="h2" data-anim="rise" data-i18n="about.title">A small crew that treats your property like a portfolio piece.</h2>
+          <p class="about__p" data-anim="rise" data-i18n="about.p1">PF Construction Masonry is based in Long Branch, NJ, serving homes and businesses across Monmouth County. From pavers and brick to concrete, stone, tile and foundations — we build it solid, and we build it right.</p>
+          <ul class="checks" data-anim-group>
+            <li data-anim="rise"><span class="sq" aria-hidden="true"></span><span data-i18n="about.c1">Skilled, experienced crew</span></li>
+            <li data-anim="rise"><span class="sq" aria-hidden="true"></span><span data-i18n="about.c2">Quality materials</span></li>
+            <li data-anim="rise"><span class="sq" aria-hidden="true"></span><span data-i18n="about.c3">On-time, clean job sites</span></li>
+            <li data-anim="rise"><span class="sq" aria-hidden="true"></span><span data-i18n="about.c4">Clear estimates, no surprises</span></li>
           </ul>
-          <a href="#contato" class="btn btn--dark reveal" data-i18n="about.btn">Talk to our team</a>
+        </div>
+        <div class="about__media">
+          <figure>
+            <div class="frame" data-anim="chisel" data-drift="0.08"><img src="assets/img/about-team.jpg" alt="Mason laying a block wall" loading="lazy" decoding="async" /></div>
+            <figcaption class="cap mono"><span data-i18n="about.cap1">Crew at work</span><span>MONMOUTH COUNTY, NJ</span></figcaption>
+          </figure>
+          <figure class="about__media-sub">
+            <div class="frame" data-anim="chisel" data-dir="rtl" data-drift="0.08"><img src="assets/img/about-work.jpg" alt="Brickwork detail" loading="lazy" decoding="async" /></div>
+            <figcaption class="cap mono"><span data-i18n="about.cap2">Brick detail</span><span>FIG. 02</span></figcaption>
+          </figure>
         </div>
       </div>
     </section>
 
-    <!-- ====================== PROCESSO ====================== -->
-    <section class="section section--alt" id="processo">
+    <!-- ====================== 04 — PROCESSO ====================== -->
+    <section class="section process" id="processo">
       <div class="container">
-        <div class="section__head">
-          <p class="eyebrow reveal" data-i18n="process.eyebrow">How it works</p>
-          <h2 class="section__title reveal" data-i18n="process.title">From estimate to finished project in 4 steps</h2>
-          <p class="section__lead reveal" data-i18n="process.lead">A simple, transparent process at every stage.</p>
+        <div class="sec-head" data-anim="rise">
+          <span class="mono sec-idx" data-i18n="process.idx">04 — Process</span>
+          <span class="rule" data-anim="rule" aria-hidden="true"></span>
         </div>
-        <ol class="steps">
-          <li class="step reveal"><div class="step__num">01</div><h3 class="step__title" data-i18n="step1.t">Visit &amp; Assessment</h3><p class="step__text" data-i18n="step1.d">We come to you, look at the site and measure everything precisely.</p></li>
-          <li class="step reveal"><div class="step__num">02</div><h3 class="step__title" data-i18n="step2.t">Estimate &amp; Materials</h3><p class="step__text" data-i18n="step2.d">We present material options and a clear, no-surprise estimate.</p></li>
-          <li class="step reveal"><div class="step__num">03</div><h3 class="step__title" data-i18n="step3.t">Construction</h3><p class="step__text" data-i18n="step3.d">We prep the base and build with an experienced, meticulous crew.</p></li>
-          <li class="step reveal"><div class="step__num">04</div><h3 class="step__title" data-i18n="step4.t">Delivery &amp; Clean-up</h3><p class="step__text" data-i18n="step4.d">We finish on time and leave the site clean and ready to enjoy.</p></li>
-        </ol>
+        <h2 class="h2" data-anim="rise" data-i18n="process.title">From walkthrough to walk-on</h2>
+        <div class="proc" data-proc>
+          <div class="proc__rail" aria-hidden="true">
+            <span class="proc__line"></span>
+            <span class="proc__node"></span><span class="proc__node"></span><span class="proc__node"></span><span class="proc__node"></span>
+          </div>
+          <ol class="proc__steps">
+            <li class="proc__step"><span class="mono proc__n">01</span><h3 data-i18n="step1.t">Site visit</h3><p data-i18n="step1.d">We come to you, look at the site and measure everything precisely.</p></li>
+            <li class="proc__step"><span class="mono proc__n">02</span><h3 data-i18n="step2.t">Estimate</h3><p data-i18n="step2.d">Material options and a clear, no-surprise estimate.</p></li>
+            <li class="proc__step"><span class="mono proc__n">03</span><h3 data-i18n="step3.t">Construction</h3><p data-i18n="step3.d">We prep the base and build with an experienced, meticulous crew.</p></li>
+            <li class="proc__step"><span class="mono proc__n">04</span><h3 data-i18n="step4.t">Delivery</h3><p data-i18n="step4.d">On time, with the site clean and ready to enjoy.</p></li>
+          </ol>
+        </div>
       </div>
     </section>
 
-    <!-- ====================== PROJETOS / GALERIA ====================== -->
-    <section class="section" id="obras">
+    <!-- ====================== 05 — PROJETOS ====================== -->
+    <!-- ⚠️ TROCAR: fotos e cidades dos projetos reais do cliente -->
+    <section class="section gallery" id="obras">
+      <div class="container container--wide">
+        <div class="sec-head" data-anim="rise">
+          <span class="mono sec-idx" data-i18n="gallery.idx">05 — Work</span>
+          <span class="rule" data-anim="rule" aria-hidden="true"></span>
+          <span class="sec-note mono" data-i18n="gallery.count">Six of 300+</span>
+        </div>
+        <h2 class="h2" data-anim="rise" data-i18n="gallery.title">Selected projects</h2>
+
+        <div class="works">
+          <figure class="work w1">
+            <button class="frame work__btn" data-anim="chisel" data-full="assets/img/obra-1.jpg" data-caption="Paver Patio — Long Branch, NJ">
+              <img src="assets/img/obra-1.jpg" alt="Stone paver patio" loading="lazy" decoding="async" />
+            </button>
+            <figcaption class="cap mono"><span data-i18n="work1.name">Paver patio</span><span class="cap__town">LONG BRANCH, NJ</span></figcaption>
+          </figure>
+          <figure class="work w2">
+            <button class="frame work__btn" data-anim="chisel" data-dir="rtl" data-full="assets/img/obra-2.jpg" data-caption="Brick Wall — Ocean Township, NJ">
+              <img src="assets/img/obra-2.jpg" alt="Red brick wall" loading="lazy" decoding="async" />
+            </button>
+            <figcaption class="cap mono"><span data-i18n="work2.name">Brick wall</span><span class="cap__town">OCEAN TOWNSHIP, NJ</span></figcaption>
+          </figure>
+          <figure class="work w3">
+            <button class="frame work__btn" data-anim="chisel" data-full="assets/img/obra-3.jpg" data-caption="Garden Stone Wall — Deal, NJ">
+              <img src="assets/img/obra-3.jpg" alt="Garden stone wall with arches" loading="lazy" decoding="async" />
+            </button>
+            <figcaption class="cap mono"><span data-i18n="work3.name">Garden stone wall</span><span class="cap__town">DEAL, NJ</span></figcaption>
+          </figure>
+          <figure class="work w4">
+            <button class="frame work__btn" data-anim="chisel" data-dir="rtl" data-full="assets/img/obra-4.jpg" data-caption="Concrete Driveway — Eatontown, NJ">
+              <img src="assets/img/obra-4.jpg" alt="Concrete driveway of a modern house" loading="lazy" decoding="async" />
+            </button>
+            <figcaption class="cap mono"><span data-i18n="work4.name">Concrete driveway</span><span class="cap__town">EATONTOWN, NJ</span></figcaption>
+          </figure>
+          <figure class="work w5">
+            <button class="frame work__btn" data-anim="chisel" data-full="assets/img/obra-5.jpg" data-caption="Outdoor Patio — West Long Branch, NJ">
+              <img src="assets/img/obra-5.jpg" alt="Outdoor patio with furniture" loading="lazy" decoding="async" />
+            </button>
+            <figcaption class="cap mono"><span data-i18n="work5.name">Outdoor patio</span><span class="cap__town">WEST LONG BRANCH, NJ</span></figcaption>
+          </figure>
+          <figure class="work w6">
+            <button class="frame work__btn" data-anim="chisel" data-dir="rtl" data-full="assets/img/obra-6.jpg" data-caption="Stone Patio — Monmouth Beach, NJ">
+              <img src="assets/img/obra-6.jpg" alt="Stone patio with wall" loading="lazy" decoding="async" />
+            </button>
+            <figcaption class="cap mono"><span data-i18n="work6.name">Stone patio</span><span class="cap__town">MONMOUTH BEACH, NJ</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== 06 — INSTAGRAM ====================== -->
+    <section class="section reels" id="instagram">
       <div class="container">
-        <div class="section__head">
-          <p class="eyebrow reveal" data-i18n="gallery.eyebrow">Projects</p>
-          <h2 class="section__title reveal" data-i18n="gallery.title">Work that speaks for itself</h2>
-          <p class="section__lead reveal" data-i18n="gallery.lead">A few of the projects we've built.</p>
+        <div class="sec-head" data-anim="rise">
+          <span class="mono sec-idx" data-i18n="reels.idx">06 — On site</span>
+          <span class="rule" data-anim="rule" aria-hidden="true"></span>
+          <!-- ⚠️ TROCAR: usuário do Instagram (aqui e no i18n.js, chave reels.handle) -->
+          <a class="link-ink reels__handle" href="https://www.instagram.com/pfmasonry/" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+            @<span data-i18n="reels.handle">pfmasonry</span>
+          </a>
         </div>
-        <div class="filters reveal" role="group" aria-label="Filter projects">
-          <button class="filter is-active" data-filter="all" data-i18n="filter.all">All</button>
-          <button class="filter" data-filter="paver" data-i18n="filter.paver">Pavers</button>
-          <button class="filter" data-filter="brick" data-i18n="filter.brick">Brick</button>
-          <button class="filter" data-filter="stone" data-i18n="filter.stone">Stone</button>
-          <button class="filter" data-filter="concrete" data-i18n="filter.concrete">Concrete</button>
-        </div>
-        <div class="gallery">
-          <button class="work reveal" data-category="paver" data-full="assets/img/obra-1.jpg" data-caption="Paver Patio">
-            <img src="assets/img/obra-1.jpg" alt="" loading="lazy" />
-            <span class="work__info"><span class="work__tag" data-i18n="work1.tag">Pavers</span><span class="work__name" data-i18n="work1.name">Paver Patio</span></span>
-          </button>
-          <button class="work reveal" data-category="brick" data-full="assets/img/obra-2.jpg" data-caption="Brick Wall">
-            <img src="assets/img/obra-2.jpg" alt="" loading="lazy" />
-            <span class="work__info"><span class="work__tag" data-i18n="work2.tag">Brick</span><span class="work__name" data-i18n="work2.name">Brick Wall</span></span>
-          </button>
-          <button class="work reveal" data-category="stone" data-full="assets/img/obra-3.jpg" data-caption="Garden Stone Wall">
-            <img src="assets/img/obra-3.jpg" alt="" loading="lazy" />
-            <span class="work__info"><span class="work__tag" data-i18n="work3.tag">Stone</span><span class="work__name" data-i18n="work3.name">Garden Stone Wall</span></span>
-          </button>
-          <button class="work reveal" data-category="concrete" data-full="assets/img/obra-4.jpg" data-caption="Concrete Driveway">
-            <img src="assets/img/obra-4.jpg" alt="" loading="lazy" />
-            <span class="work__info"><span class="work__tag" data-i18n="work4.tag">Concrete</span><span class="work__name" data-i18n="work4.name">Concrete Driveway</span></span>
-          </button>
-          <button class="work reveal" data-category="paver" data-full="assets/img/obra-5.jpg" data-caption="Outdoor Patio">
-            <img src="assets/img/obra-5.jpg" alt="" loading="lazy" />
-            <span class="work__info"><span class="work__tag" data-i18n="work5.tag">Pavers</span><span class="work__name" data-i18n="work5.name">Outdoor Patio</span></span>
-          </button>
-          <button class="work reveal" data-category="stone" data-full="assets/img/obra-6.jpg" data-caption="Stone Patio">
-            <img src="assets/img/obra-6.jpg" alt="" loading="lazy" />
-            <span class="work__info"><span class="work__tag" data-i18n="work6.tag">Stone</span><span class="work__name" data-i18n="work6.name">Stone Patio</span></span>
-          </button>
-        </div>
+        <h2 class="h2" data-anim="rise" data-i18n="reels.title">Follow the work</h2>
       </div>
-    </section>
-
-    <!-- ====================== FAIXA CTA ====================== -->
-    <section class="cta-band">
-      <img class="cta-band__img" src="assets/img/cta.jpg" alt="" loading="lazy" aria-hidden="true" />
-      <div class="cta-band__overlay"></div>
-      <div class="container cta-band__content reveal">
-        <h2 class="cta-band__title" data-i18n="cta.title">Ready to start your masonry project?</h2>
-        <p class="cta-band__text" data-i18n="cta.text">Pavers, brick, concrete, stone and more — built solid, delivered on time.</p>
-        <a href="#contato" class="btn btn--primary btn--lg js-whatsapp" data-i18n="cta.btn">Get a free estimate</a>
+      <div class="rail-wrap container container--wide">
+        <div class="rail" data-anim-group>
+          <!-- Quando os reels do cliente chegarem, troque os posters por miniaturas dos vídeos (mesmos cards) -->
+          <a class="rail__card rail__card--soon" href="https://www.instagram.com/pfmasonry/" target="_blank" rel="noopener" data-anim="rise">
+            <img src="assets/img/obra-1.jpg" alt="" loading="lazy" decoding="async" />
+            <span class="rail__play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10.5"/><path d="M10 8.5v7l6-3.5-6-3.5Z"/></svg></span>
+            <span class="mono rail__tag" data-i18n="reels.soon">Client reels — coming soon</span>
+          </a>
+          <a class="rail__card rail__card--soon" href="https://www.instagram.com/pfmasonry/" target="_blank" rel="noopener" data-anim="rise">
+            <img src="assets/img/obra-5.jpg" alt="" loading="lazy" decoding="async" />
+            <span class="rail__play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10.5"/><path d="M10 8.5v7l6-3.5-6-3.5Z"/></svg></span>
+            <span class="mono rail__tag" data-i18n="reels.soon">Client reels — coming soon</span>
+          </a>
+          <a class="rail__card" href="https://www.instagram.com/pfmasonry/" target="_blank" rel="noopener" data-anim="rise">
+            <img src="assets/img/obra-3.jpg" alt="" loading="lazy" decoding="async" />
+            <span class="rail__play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10.5"/><path d="M10 8.5v7l6-3.5-6-3.5Z"/></svg></span>
+            <span class="mono rail__tag" data-i18n="reels.tag1">Stonework</span>
+          </a>
+          <a class="rail__card" href="https://www.instagram.com/pfmasonry/" target="_blank" rel="noopener" data-anim="rise">
+            <img src="assets/img/about-work.jpg" alt="" loading="lazy" decoding="async" />
+            <span class="rail__play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10.5"/><path d="M10 8.5v7l6-3.5-6-3.5Z"/></svg></span>
+            <span class="mono rail__tag" data-i18n="reels.tag2">Brickwork</span>
+          </a>
+          <a class="rail__card" href="https://www.instagram.com/pfmasonry/" target="_blank" rel="noopener" data-anim="rise">
+            <img src="assets/img/obra-6.jpg" alt="" loading="lazy" decoding="async" />
+            <span class="rail__play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10.5"/><path d="M10 8.5v7l6-3.5-6-3.5Z"/></svg></span>
+            <span class="mono rail__tag" data-i18n="reels.tag3">Patios</span>
+          </a>
+        </div>
       </div>
     </section>
 
     <!-- ====================== DEPOIMENTOS ====================== -->
     <!-- ⚠️ TROCAR: substitua pelos depoimentos reais de clientes -->
-    <section class="section" id="depoimentos">
-      <div class="container">
-        <div class="section__head">
-          <p class="eyebrow reveal" data-i18n="test.eyebrow">Reviews</p>
-          <h2 class="section__title reveal" data-i18n="test.title">What our clients say</h2>
+    <section class="tband" id="depoimentos">
+      <div class="container tband__inner">
+        <span class="tband__mark" aria-hidden="true" data-anim="rise">“</span>
+        <div class="tstage" data-tstage>
+          <figure class="tq is-active">
+            <blockquote data-i18n="t1.q">They rebuilt our paver driveway and it looks amazing. Straight lines, perfect pitch — true professionals.</blockquote>
+            <figcaption class="mono"><span data-i18n="t1.n">Michael R.</span> — <span data-i18n="t1.r">Long Branch, NJ</span></figcaption>
+          </figure>
+          <figure class="tq">
+            <blockquote data-i18n="t2.q">Professional from start to finish. The estimate was exactly as agreed, no surprises.</blockquote>
+            <figcaption class="mono"><span data-i18n="t2.n">Sandra M.</span> — <span data-i18n="t2.r">Ocean Township, NJ</span></figcaption>
+          </figure>
+          <figure class="tq">
+            <blockquote data-i18n="t3.q">They replaced our sidewalk and steps quickly and left everything spotless. Highly recommend.</blockquote>
+            <figcaption class="mono"><span data-i18n="t3.n">James T.</span> — <span data-i18n="t3.r">West Long Branch, NJ</span></figcaption>
+          </figure>
         </div>
-        <div class="testimonials">
-          <figure class="testimonial reveal">
-            <div class="stars" aria-label="5/5">★★★★★</div>
-            <blockquote data-i18n="t1.q">“They rebuilt our paver driveway and it looks amazing. Straight lines, perfect pitch — true professionals.”</blockquote>
-            <figcaption><strong data-i18n="t1.n">Michael R.</strong><span data-i18n="t1.r">Homeowner, Long Branch</span></figcaption>
-          </figure>
-          <figure class="testimonial reveal">
-            <div class="stars" aria-label="5/5">★★★★★</div>
-            <blockquote data-i18n="t2.q">“Professional from start to finish. The estimate was exactly as agreed, no surprises.”</blockquote>
-            <figcaption><strong data-i18n="t2.n">Sandra M.</strong><span data-i18n="t2.r">Homeowner, Ocean Township</span></figcaption>
-          </figure>
-          <figure class="testimonial reveal">
-            <div class="stars" aria-label="5/5">★★★★★</div>
-            <blockquote data-i18n="t3.q">“They replaced our sidewalk and steps quickly and left everything spotless. Highly recommend.”</blockquote>
-            <figcaption><strong data-i18n="t3.n">James T.</strong><span data-i18n="t3.r">Business owner, West Long Branch</span></figcaption>
-          </figure>
+        <div class="tnav">
+          <button class="tnav__btn" data-tprev data-i18n-aria="test.prev" aria-label="Previous quote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <span class="mono" data-tindex>1 / 3</span>
+          <button class="tnav__btn" data-tnext data-i18n-aria="test.next" aria-label="Next quote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
         </div>
       </div>
     </section>
 
-    <!-- ====================== CONTATO ====================== -->
-    <section class="section section--alt" id="contato">
-      <div class="container">
-        <div class="section__head">
-          <p class="eyebrow reveal" data-i18n="contact.eyebrow">Contact</p>
-          <h2 class="section__title reveal" data-i18n="contact.title">Let's build your project</h2>
-          <p class="section__lead reveal" data-i18n="contact.lead">Tell us what you need. The estimate is free with no obligation.</p>
+    <!-- ====================== CTA ESCURO ====================== -->
+    <section class="dark-cta">
+      <img class="dark-cta__tex" src="assets/img/cta.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true" data-drift="0.05" />
+      <span class="dark-cta__plate" aria-hidden="true" data-anim="plate"></span>
+      <div class="container dark-cta__inner" data-anim-group>
+        <p class="mono dark-cta__eyebrow" data-anim="rise" data-i18n="cta.eyebrow">Free estimate</p>
+        <h2 class="dark-cta__title" data-anim="rise"><span data-i18n="cta.title">Let’s build something that lasts</span><span class="dot">.</span></h2>
+        <p class="dark-cta__sub" data-anim="rise" data-i18n="cta.sub">Tell us about your project — we’ll walk the site and give you a clear, honest estimate.</p>
+        <div class="dark-cta__actions" data-anim="rise">
+          <a href="#contato" class="btn btn--red btn--brick btn--lg js-whatsapp">
+            <span class="btn__fill" aria-hidden="true"><i></i><i></i><i></i></span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.16c-.25.69-1.45 1.32-1.99 1.36-.53.04-.53.42-3.34-.7-2.81-1.12-4.57-3.97-4.71-4.16-.14-.19-1.13-1.5-1.13-2.86 0-1.36.71-2.03.97-2.31.25-.28.55-.35.74-.35.18 0 .37 0 .53.01.17.01.4-.06.62.48.25.59.83 2.03.9 2.18.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.16-.29.37-.42.49-.14.14-.28.29-.12.57.17.28.74 1.22 1.59 1.98 1.1.98 2.02 1.28 2.3 1.43.28.14.45.12.61-.07.17-.19.71-.83.9-1.11.18-.28.37-.23.62-.14.25.09 1.61.76 1.89.9.28.14.46.21.53.32.07.12.07.66-.18 1.3Z"/></svg>
+            <span data-i18n="cta.btnWhats">WhatsApp us</span>
+          </a>
+          <a href="#contato" class="btn btn--ghost btn--lg" data-i18n="cta.btnForm">Request an estimate ↓</a>
+        </div>
+        <p class="dark-cta__phones" data-anim="rise">
+          <span class="mono" data-i18n="cta.call">Or call:</span>
+          <a class="mono dark-cta__tel" href="tel:+17324846643">(732) 484-6643</a>
+          <a class="mono dark-cta__tel" href="tel:+17324305030">(732) 430-5030</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ====================== 07 — CONTATO ====================== -->
+    <section class="section contact" id="contato">
+      <div class="container contact__grid">
+        <div class="contact__sticky">
+          <div class="sec-head" data-anim="rise">
+            <span class="mono sec-idx" data-i18n="contact.idx">07 — Contact</span>
+            <span class="rule" data-anim="rule" aria-hidden="true"></span>
+          </div>
+          <h2 class="h2" data-anim="rise" data-i18n="contact.title">Start with a site visit.</h2>
+          <p class="contact__lead" data-anim="rise" data-i18n="contact.lead">Free estimate, no obligation. Tell us what you need and we’ll take it from there.</p>
+          <dl class="spec" data-anim-group>
+            <div class="spec__row" data-anim="rise"><dt class="mono" data-i18n="contact.phoneL">Phone</dt><dd><a href="tel:+17324846643">(732) 484-6643</a></dd></div>
+            <div class="spec__row" data-anim="rise"><dt class="mono">WhatsApp</dt><dd><a class="js-whatsapp" href="#contato">(732) 484-6643</a></dd></div>
+            <div class="spec__row" data-anim="rise"><dt class="mono" data-i18n="contact.phone2L">Phone 2</dt><dd><a href="tel:+17324305030">(732) 430-5030</a></dd></div>
+            <div class="spec__row" data-anim="rise"><dt class="mono" data-i18n="contact.emailL">Email</dt><dd><a href="mailto:pf732masonry@gmail.com">pf732masonry@gmail.com</a></dd></div>
+            <div class="spec__row" data-anim="rise"><dt class="mono" data-i18n="contact.areaL">Area</dt><dd data-i18n="contact.areaV">Long Branch, NJ — all of Monmouth County</dd></div>
+            <!-- ⚠️ TROCAR: confirmar horário de atendimento -->
+            <div class="spec__row" data-anim="rise"><dt class="mono" data-i18n="contact.hoursL">Hours</dt><dd data-i18n="contact.hoursV">Mon–Sat, 7am–6pm</dd></div>
+          </dl>
+          <div class="glyph" aria-hidden="true" data-anim="rise">
+            <i></i><i></i><i class="glyph--red"></i><i></i><i class="glyph--red"></i><i></i><i class="glyph--red"></i><i></i><i></i>
+          </div>
         </div>
 
-        <div class="contact">
-          <div class="contact__info reveal">
-            <ul class="contact__list">
-              <li>
-                <span class="contact__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-5.2-7-11a7 7 0 1 1 14 0c0 5.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
-                <div>
-                  <strong data-i18n="contact.addrL">Service area</strong>
-                  <p data-i18n="contact.addrV">Long Branch, NJ — serving all of Monmouth County</p>
-                </div>
-              </li>
-              <li>
-                <span class="contact__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg></span>
-                <div>
-                  <strong data-i18n="contact.phoneL">Phone / WhatsApp</strong>
-                  <p><a href="tel:+17324846643">(732) 484-6643</a><br /><a href="tel:+17324305030">(732) 430-5030</a></p>
-                </div>
-              </li>
-              <li>
-                <span class="contact__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
-                <div>
-                  <strong data-i18n="contact.emailL">Email</strong>
-                  <p><a href="mailto:pf732masonry@gmail.com">pf732masonry@gmail.com</a></p>
-                </div>
-              </li>
-            </ul>
-
-            <div class="contact__map" data-map>
-              <iframe title="Map" data-src="https://maps.google.com/maps?q=Long%20Branch,%20NJ&t=&z=11&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <form class="contact__form" data-form novalidate data-anim="rise">
+          <div class="field">
+            <label class="mono" for="nome" data-i18n="form.name">Full name</label>
+            <input type="text" id="nome" name="name" autocomplete="name" required data-i18n-ph="form.namePh" placeholder="Your name" />
+            <span class="field__err mono" data-err aria-live="polite"></span>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label class="mono" for="email" data-i18n="form.email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required data-i18n-ph="form.emailPh" placeholder="you@email.com" />
+              <span class="field__err mono" data-err aria-live="polite"></span>
+            </div>
+            <div class="field">
+              <label class="mono" for="telefone" data-i18n="form.phone">Phone / WhatsApp</label>
+              <input type="tel" id="telefone" name="phone" autocomplete="tel" placeholder="(732) 000-0000" />
+              <span class="field__err mono" data-err aria-live="polite"></span>
             </div>
           </div>
-
-          <form class="contact__form reveal" data-form novalidate>
-            <div class="field">
-              <label for="nome" data-i18n="form.name">Full name</label>
-              <input type="text" id="nome" name="name" autocomplete="name" required data-i18n-ph="form.namePh" placeholder="Your name" />
-            </div>
-            <div class="field-row">
-              <div class="field">
-                <label for="email" data-i18n="form.email">Email</label>
-                <input type="email" id="email" name="email" autocomplete="email" required data-i18n-ph="form.emailPh" placeholder="you@email.com" />
-              </div>
-              <div class="field">
-                <label for="telefone" data-i18n="form.phone">Phone / WhatsApp</label>
-                <input type="tel" id="telefone" name="phone" autocomplete="tel" placeholder="(732) 000-0000" />
-              </div>
-            </div>
-            <div class="field">
-              <label for="servico" data-i18n="form.service">Service type</label>
-              <select id="servico" name="service">
-                <option value="" disabled selected data-i18n="form.opt0">Select an option</option>
-                <option data-i18n="form.opt1">Pavers</option>
-                <option data-i18n="form.opt2">Brick</option>
-                <option data-i18n="form.opt3">Concrete</option>
-                <option data-i18n="form.opt4">Stone</option>
-                <option data-i18n="form.opt5">Tile</option>
-                <option data-i18n="form.opt6">Sidewalk / Curb</option>
-                <option data-i18n="form.opt7">Foundation</option>
-                <option data-i18n="form.opt8">Other</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="mensagem" data-i18n="form.message">Message</label>
-              <textarea id="mensagem" name="message" rows="4" required data-i18n-ph="form.messagePh" placeholder="Tell us a bit about your project..."></textarea>
-            </div>
-            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
-            <button type="submit" class="btn btn--primary btn--lg btn--block" data-submit data-i18n="form.submit">Send message</button>
-            <p class="form-status" data-form-status role="status" aria-live="polite"></p>
-            <p class="form-note" data-i18n="form.note">By submitting, you agree to be contacted about your estimate request.</p>
-          </form>
-        </div>
+          <div class="field">
+            <label class="mono" for="servico" data-i18n="form.service">Service type</label>
+            <select id="servico" name="service">
+              <option value="" disabled selected data-i18n="form.opt0">Select an option</option>
+              <option value="Pavers" data-i18n="form.opt1">Pavers</option>
+              <option value="Brick" data-i18n="form.opt2">Brick</option>
+              <option value="Concrete" data-i18n="form.opt3">Concrete</option>
+              <option value="Stone" data-i18n="form.opt4">Stone</option>
+              <option value="Tile" data-i18n="form.opt5">Tile</option>
+              <option value="Sidewalk / Curb" data-i18n="form.opt6">Sidewalk / Curb</option>
+              <option value="Foundation" data-i18n="form.opt7">Foundation</option>
+              <option value="Other" data-i18n="form.opt8">Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="mono" for="mensagem" data-i18n="form.message">Message</label>
+            <textarea id="mensagem" name="message" rows="4" required data-i18n-ph="form.messagePh" placeholder="Tell us a bit about your project..."></textarea>
+            <span class="field__err mono" data-err aria-live="polite"></span>
+          </div>
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+          <button type="submit" class="btn btn--red btn--brick btn--block btn--lg" data-submit>
+            <span class="btn__fill" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span data-i18n="form.submit">Send request</span>
+          </button>
+          <p class="form-status mono" data-form-status role="status" aria-live="polite"></p>
+          <p class="form-note mono" data-i18n="form.note">Free estimate — we reply within one business day.</p>
+        </form>
       </div>
     </section>
   </main>
 
   <!-- ====================== RODAPÉ ====================== -->
   <footer class="footer">
-    <div class="container footer__grid">
-      <div class="footer__brand">
-        <a class="footer__logo" href="#topo" aria-label="PF Construction Masonry">
-          <img src="assets/img/logo-white.png" alt="PF Construction Masonry" />
-        </a>
-        <p class="footer__desc" data-i18n="footer.desc">Masonry with quality, on-time delivery and transparency. From the foundation to the final detail.</p>
+    <div class="container">
+      <p class="wordmark" data-anim="rise" aria-hidden="true"><b>PF</b> Construction Masonry</p>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h4 class="mono" data-i18n="footer.nav">Navigation</h4>
+          <a href="#servicos" data-i18n="nav.services">Services</a>
+          <a href="#sobre" data-i18n="nav.about">About</a>
+          <a href="#processo" data-i18n="nav.process">Process</a>
+          <a href="#obras" data-i18n="nav.works">Work</a>
+          <a href="#instagram" data-i18n="reels.eyebrow">Instagram</a>
+          <a href="#depoimentos" data-i18n="nav.testimonials">Reviews</a>
+          <a href="#contato" data-i18n="nav.contact">Contact</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="mono" data-i18n="footer.services">Services</h4>
+          <a href="#servicos" data-i18n="svc1.t">Pavers</a>
+          <a href="#servicos" data-i18n="svc2.t">Brick</a>
+          <a href="#servicos" data-i18n="svc3.t">Concrete</a>
+          <a href="#servicos" data-i18n="svc4.t">Stone</a>
+          <a href="#servicos" data-i18n="svc5.t">Tile</a>
+          <a href="#servicos" data-i18n="svc6.t">Sidewalk &amp; Curb</a>
+          <a href="#servicos" data-i18n="svc7.t">Foundation</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="mono" data-i18n="footer.contact">Contact</h4>
+          <a href="tel:+17324846643">(732) 484-6643</a>
+          <a href="tel:+17324305030">(732) 430-5030</a>
+          <a href="mailto:pf732masonry@gmail.com">pf732masonry@gmail.com</a>
+          <p class="footer__addr">Long Branch, NJ · Monmouth County</p>
+        </div>
       </div>
-      <div class="footer__col">
-        <h4 data-i18n="footer.nav">Navigation</h4>
-        <a href="#servicos" data-i18n="nav.services">Services</a>
-        <a href="#instagram" data-i18n="reels.eyebrow">Instagram</a>
-        <a href="#sobre" data-i18n="nav.about">About</a>
-        <a href="#processo" data-i18n="nav.process">How it works</a>
-        <a href="#obras" data-i18n="nav.works">Projects</a>
-        <a href="#depoimentos" data-i18n="nav.testimonials">Reviews</a>
-        <a href="#contato" data-i18n="nav.contact">Contact</a>
-      </div>
-      <div class="footer__col">
-        <h4 data-i18n="footer.services">Services</h4>
-        <a href="#servicos" data-i18n="svc1.t">Pavers</a>
-        <a href="#servicos" data-i18n="svc2.t">Brick</a>
-        <a href="#servicos" data-i18n="svc3.t">Concrete</a>
-        <a href="#servicos" data-i18n="svc4.t">Stone</a>
-        <a href="#servicos" data-i18n="svc5.t">Tile</a>
-        <a href="#servicos" data-i18n="svc6.t">Sidewalk &amp; Curb</a>
-        <a href="#servicos" data-i18n="svc7.t">Foundation</a>
-      </div>
-      <div class="footer__col">
-        <h4 data-i18n="footer.contact">Contact</h4>
-        <a href="tel:+17324846643">(732) 484-6643</a>
-        <a href="tel:+17324305030">(732) 430-5030</a>
-        <a href="mailto:pf732masonry@gmail.com">pf732masonry@gmail.com</a>
-        <p class="footer__addr">Long Branch, NJ · Monmouth County</p>
-      </div>
-    </div>
-    <div class="footer__bottom">
-      <div class="container footer__bottom-inner">
-        <p>© <span data-year>2026</span> PF Construction Masonry. <span data-i18n="footer.rights">All rights reserved.</span></p>
-        <p class="footer__credit" data-i18n="footer.credit">Built with care to grow your business.</p>
+      <div class="footer__bottom">
+        <p class="mono">© <span data-year>2026</span> PF Construction Masonry — <span data-i18n="footer.rights">All rights reserved.</span></p>
+        <div class="lang" role="group" data-i18n-aria="aria.lang" aria-label="Select language">
+          <button type="button" data-lang="en">EN</button>
+          <button type="button" data-lang="pt">PT</button>
+          <button type="button" data-lang="es">ES</button>
+        </div>
+        <a class="link-ink mono" href="#top" data-i18n="footer.top">Back to top ↑</a>
       </div>
     </div>
   </footer>
 
   <!-- Botão flutuante WhatsApp -->
-  <a class="wa-float js-whatsapp" href="#contato" data-i18n-aria="aria.whats" aria-label="Chat on WhatsApp" title="WhatsApp">
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.16c-.25.69-1.45 1.32-1.99 1.36-.53.04-.53.42-3.34-.7-2.81-1.12-4.57-3.97-4.71-4.16-.14-.19-1.13-1.5-1.13-2.86 0-1.36.71-2.03.97-2.31.25-.28.55-.35.74-.35.18 0 .37 0 .53.01.17.01.4-.06.62.48.25.59.83 2.03.9 2.18.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.16-.29.37-.42.49-.14.14-.28.29-.12.57.17.28.74 1.22 1.59 1.98 1.1.98 2.02 1.28 2.3 1.43.28.14.45.12.61-.07.17-.19.71-.83.9-1.11.18-.28.37-.23.62-.14.25.09 1.61.76 1.89.9.28.14.46.21.53.32.07.12.07.66-.18 1.3Z"/></svg>
+  <a class="wa-float js-whatsapp" href="#contato" data-wa-float data-i18n-aria="aria.whats" aria-label="Chat on WhatsApp">
+    <span class="wa-float__tip mono" data-i18n="wa.tip" aria-hidden="true">Talk to a mason</span>
+    <span class="wa-float__dot" aria-hidden="true"></span>
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.16c-.25.69-1.45 1.32-1.99 1.36-.53.04-.53.42-3.34-.7-2.81-1.12-4.57-3.97-4.71-4.16-.14-.19-1.13-1.5-1.13-2.86 0-1.36.71-2.03.97-2.31.25-.28.55-.35.74-.35.18 0 .37 0 .53.01.17.01.4-.06.62.48.25.59.83 2.03.9 2.18.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.16-.29.37-.42.49-.14.14-.28.29-.12.57.17.28.74 1.22 1.59 1.98 1.1.98 2.02 1.28 2.3 1.43.28.14.45.12.61-.07.17-.19.71-.83.9-1.11.18-.28.37-.23.62-.14.25.09 1.61.76 1.89.9.28.14.46.21.53.32.07.12.07.66-.18 1.3Z"/></svg>
   </a>
 
-  <button class="to-top" data-i18n-aria="aria.toTop" aria-label="Back to top" data-to-top>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
-  </button>
-
-  <!-- Lightbox -->
-  <div class="lightbox" data-lightbox aria-hidden="true">
-    <button class="lightbox__close" aria-label="Close" data-lb-close>&times;</button>
-    <button class="lightbox__nav lightbox__nav--prev" aria-label="Previous" data-lb-prev>&#10094;</button>
-    <figure class="lightbox__fig"><img src="" alt="" data-lb-img /><figcaption data-lb-cap></figcaption></figure>
-    <button class="lightbox__nav lightbox__nav--next" aria-label="Next" data-lb-next>&#10095;</button>
+  <!-- Lightbox (claro) -->
+  <div class="lightbox" data-lightbox aria-hidden="true" role="dialog" aria-modal="true">
+    <span class="mono lightbox__count" data-lb-count>1 / 6</span>
+    <button class="lightbox__close" data-i18n-aria="aria.lbClose" aria-label="Close" data-lb-close>×</button>
+    <button class="lightbox__nav lightbox__nav--prev" data-i18n-aria="aria.lbPrev" aria-label="Previous" data-lb-prev><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <figure class="lightbox__fig"><img src="" alt="" data-lb-img /><figcaption class="mono" data-lb-cap></figcaption></figure>
+    <button class="lightbox__nav lightbox__nav--next" data-i18n-aria="aria.lbNext" aria-label="Next" data-lb-next><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
   </div>
 
   <!-- SEO local -->

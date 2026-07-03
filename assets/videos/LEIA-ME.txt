@@ -1,26 +1,18 @@
-VÍDEOS DO SIMULADOR DE INSTAGRAM (Reels)
-=========================================
+VÍDEOS / REELS DO CLIENTE
+=========================
 
-Salve os vídeos verticais (9:16) AQUI nesta pasta, com estes nomes:
+No layout atual ("Atelier Stone"), a seção 06 — On site mostra um trilho
+horizontal de cards 9:16 que hoje usam FOTOS como capa e apontam para o
+perfil do Instagram (placeholder @pfmasonry — ⚠️ confirmar o usuário real).
 
-   reel-1.mp4
-   reel-2.mp4
-   reel-3.mp4
-   reel-4.mp4
-   reel-5.mp4
-   reel-6.mp4
+Quando os reels do cliente chegarem, há duas opções (me avise que eu aplico):
 
-Depois, abra assets/js/main.js e mude:
+1. MAIS SIMPLES — apontar cada card para o link do reel no Instagram
+   (basta trocar o href de cada .rail__card no index.html e usar um
+   frame do vídeo como capa).
 
-   const REELS_READY = false;   ->   const REELS_READY = true;
+2. VÍDEO NO PRÓPRIO SITE — salvar os arquivos .mp4 (9:16, H.264,
+   de preferência < 10 MB cada) NESTA PASTA e trocar as <img> dos cards
+   por <video muted loop playsinline> no index.html.
 
-Assim que os arquivos estiverem aqui (e a flag ligada), o simulador toca
-cada um automaticamente (o selo "Vídeo em breve" some sozinho).
-
-Dicas:
-- Formato: MP4 (H.264). É o que toca em todos os navegadores/celulares.
-- Orientação: vertical (retrato), proporção 9:16 — igual aos Reels.
-- Tamanho: tente deixar cada vídeo abaixo de ~10 MB pra carregar rápido.
-  (dá pra comprimir de graça em https://www.freeconvert.com/video-compressor)
-
-Para ter MAIS de 6 vídeos: me avise que eu adiciono os espaços.
+Dica de compressão gratuita: https://www.freeconvert.com/video-compressor

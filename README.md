@@ -1,4 +1,4 @@
-# PF Construction Masonry — Site institucional
+# PF Construction Masonry — Site institucional ("Atelier Stone")
 
 Site **estático** (HTML + CSS + JavaScript puro), **trilíngue (EN / PT / ES)**,
 sem banco de dados e sem servidor. Custo de manutenção ≈ **R$ 0** (só o domínio).
@@ -8,16 +8,26 @@ Cliente: **PF Construction Masonry** — Long Branch, NJ (atende Monmouth County
 - Telefones: **(732) 484-6643** (principal/WhatsApp) e **(732) 430-5030**
 - E-mail: **pf732masonry@gmail.com**
 
+## 🎨 O design
+Layout editorial claro ("Atelier Stone"): fundo off-white tom papel, tipografia
+serifada gigante (Fraunces) + corpo Instrument Sans + detalhes técnicos em IBM
+Plex Mono, réguas de 1px, seções numeradas (01–07) e o vermelho da logo usado
+só como pontuação (quadradinhos, ponto final do título, botões). Animações
+"Cut Stone": revelação de imagens por corte (clip-path), textos subindo de
+máscaras, réguas que se desenham, contadores, parallax sutil e uma prévia de
+foto que segue o cursor na lista de serviços. Tudo respeita
+`prefers-reduced-motion` e funciona sem JS (conteúdo sempre visível).
+
 ```
 PF Masonry/
 ├── index.html              ← a página inteira (estrutura)
 ├── assets/
-│   ├── css/styles.css      ← visual e cores (variáveis no topo)
+│   ├── css/styles.css      ← visual e cores (variáveis no topo) + animações
 │   ├── js/
 │   │   ├── i18n.js         ← TODOS os textos, nos 3 idiomas (EN/PT/ES)
 │   │   └── main.js         ← interações + CONFIG (WhatsApp / Web3Forms)
 │   ├── img/                ← fotos + logos (troque pelos arquivos reais)
-│   └── videos/             ← reels verticais do cliente (reel-1.mp4 ... reel-6.mp4)
+│   └── videos/             ← reels do cliente (ver LEIA-ME.txt da pasta)
 ├── Logos em PNG/           ← logos originais do cliente (alta resolução)
 └── README.md               ← este arquivo
 ```
@@ -32,7 +42,7 @@ PF Masonry/
 Todos os textos do site ficam num **único dicionário**, com as três versões
 lado a lado (`en`, `pt`, `es`). Para alterar uma frase, edite as três.
 O site escolhe o idioma automaticamente pelo navegador (padrão **EN**) e
-lembra a escolha do visitante (botão **EN / PT / ES** no topo).
+lembra a escolha do visitante (botões **EN / PT / ES** no topo e no rodapé).
 
 ### 2. WhatsApp e formulário — `assets/js/main.js` (bloco `CONFIG` no topo)
 ```js
@@ -53,55 +63,53 @@ const CONFIG = {
 **B) Formspree — precisa criar conta:** crie em https://formspree.io, copie a
 URL do formulário e cole em `CONFIG.formEndpoint`.
 
-Enquanto nenhum dos dois estiver configurado, o formulário avisa e direciona ao
-WhatsApp. As mensagens de status são traduzidas no `i18n.js`.
+Enquanto nenhum dos dois estiver configurado, o "Enviar pedido" **abre o
+WhatsApp do cliente com a mensagem do formulário já preenchida** — nenhum
+lead se perde.
 
 ### 4. Instagram — ⚠️ TROCAR
-O usuário do Instagram está como placeholder **@pfmasonry**. Confirme o usuário
-real do cliente e troque:
-- em `index.html` (2 links `instagram.com/...` na seção Instagram),
+O usuário do Instagram está como placeholder **@pfmasonry**. Confirme o real e troque:
+- em `index.html` (links `instagram.com/...` na seção "06 — On site"),
 - em `assets/js/i18n.js` (chave `reels.handle`, nos 3 idiomas).
 
-Os **vídeos** (reels verticais) vão em `assets/videos/reel-1.mp4` a `reel-6.mp4`.
-Quando chegarem, mude `REELS_READY` para `true` em `assets/js/main.js`.
-Enquanto isso, a seção mostra as fotos com o selo "Vídeo em breve".
+A seção mostra um trilho horizontal de cards 9:16. Os dois primeiros estão como
+"Reels em breve"; quando os vídeos do cliente chegarem, os cards viram
+miniaturas/links dos reels (ver `assets/videos/LEIA-ME.txt`).
 
-### 5. Números e depoimentos — ⚠️ TROCAR
-- Os números da faixa escura (anos de experiência, projetos etc.) estão como
-  exemplo em `index.html` (atributo `data-count`) — confirme com o cliente.
-- Os 3 depoimentos são fictícios (marcados no `index.html` e `i18n.js`) —
-  troque por avaliações reais assim que possível.
+### 5. Números, cidades e depoimentos — ⚠️ TROCAR
+- Números da seção "01 — Record" (`data-count` no `index.html`) — confirmar.
+- As **cidades** nas legendas da galeria ("05 — Work") são exemplos — troque
+  pelas cidades reais de cada projeto (no `index.html` e nas chaves `workN.name`).
+- Os 3 depoimentos são fictícios — troque por avaliações reais.
+- Horário de atendimento (chave `contact.hoursV`) — confirmar.
 
 ### 6. Cores — `assets/css/styles.css`
-No topo, em `:root`. A paleta atual segue a **logo da PF Masonry**
-(vermelho `--primary: #d32027` + preto grafite `--ink: #15171b`). Para ajustar,
-mude principalmente `--primary`, `--primary-600` e `--accent`.
+No topo, em `:root`. Paleta: papel `--paper: #F6F3EE`, quase-preto
+`--ink: #191714` e o vermelho da logo `--red: #D32027` (use pouco — ele é a
+pontuação da marca). Fontes: Fraunces / Instrument Sans / IBM Plex Mono
+(Google Fonts, carregadas no `<head>`).
 
 ### 7. Logos
-As imagens da logo em `assets/img/` foram geradas a partir dos arquivos do
-cliente em `Logos em PNG/`:
 | Arquivo                   | Onde aparece                                   |
 |---------------------------|------------------------------------------------|
-| `header-logo.png`         | Cabeçalho (PF vermelho/preto, ao rolar a página) |
-| `header-logo-white.png`   | Cabeçalho (PF vermelho/branco, sobre o hero)   |
-| `logo-white.png`          | Rodapé (lockup completo em branco)             |
+| `header-logo.png`         | Cabeçalho, barra fixa e menu mobile            |
+| `header-logo-white.png`   | (reserva para fundos escuros)                  |
+| `logo-white.png`          | (reserva — o rodapé usa wordmark tipográfico)  |
 | `favicon.png`             | Ícone da aba do navegador (512×512)            |
 
-Para trocar, basta substituir os arquivos mantendo os mesmos nomes.
-
 ### 8. Fotos — `assets/img/`
-Substitua mantendo os **mesmos nomes** e o site usa automaticamente:
+Substitua mantendo os **mesmos nomes**:
 
-| Arquivo         | Onde aparece                          |
-|-----------------|---------------------------------------|
-| `hero.jpg`      | Topo (imagem de destaque)             |
-| `about-team.jpg`/`about-work.jpg` | Seção "Quem somos"  |
-| `obra-1..6.jpg` | Galeria de projetos (e posters dos reels) |
-| `cta.jpg`       | Faixa escura de chamada               |
+| Arquivo         | Onde aparece                                        |
+|-----------------|-----------------------------------------------------|
+| `hero.jpg`      | Foto grande do topo                                 |
+| `about-team.jpg`/`about-work.jpg` | Seção "03 — About" (+ prévias de serviços) |
+| `obra-1..6.jpg` | Galeria "05 — Work", prévias e cards do Instagram   |
+| `cta.jpg`       | Textura da faixa escura de orçamento                |
 
-> As fotos atuais são do Unsplash (uso livre) como demonstração. **O ideal é
-> trocar pelas fotos reais dos projetos da PF Masonry** — é o que mais valoriza
-> o site. Use imagens com ≥1280px de largura (otimize em https://squoosh.app).
+> As fotos atuais são do Unsplash (uso livre) como demonstração. **Troque pelas
+> fotos reais dos projetos da PF Masonry.** Use imagens com ≥1280px de largura
+> (otimize em https://squoosh.app).
 
 ---
 
@@ -113,16 +121,19 @@ Substitua mantendo os **mesmos nomes** e o site usa automaticamente:
 3. O site sobe em segundos, com HTTPS automático.
 4. Aponte o domínio do cliente em "Domínios".
 
+> Ao definir o domínio final, atualize também o `og:image` e o `canonical`
+> no `<head>` do `index.html` (hoje apontam para www.pfmasonry.com).
+
 ### GitHub Pages
 1. Suba os arquivos para um repositório.
 2. Settings → Pages → Branch `main` / pasta `/root` → Save.
 
 > Por ser estático, **não há nada para "manter" rodando** — sem custo mensal.
 > Só renove o domínio uma vez por ano. (A pasta `Logos em PNG/` e o `.claude/`
-> são só para referência/local; podem ficar de fora do deploy.)
+> podem ficar de fora do deploy.)
 
 ---
 
 ## 🧪 Testar localmente
-Abra o `index.html` no navegador (clique duplo). O formulário só envia de
-verdade após configurar o Web3Forms (passo 3).
+Abra o `index.html` no navegador (clique duplo). Sem a chave do Web3Forms
+(passo 3), o formulário abre o WhatsApp com a mensagem preenchida.

@@ -1,4 +1,4 @@
-# PF Construction Masonry — Site institucional ("Atelier Stone")
+# PF Construction Masonry — Site institucional ("Sitework")
 
 Site **estático** (HTML + CSS + JavaScript puro), **trilíngue (EN / PT / ES)**,
 sem banco de dados e sem servidor. Custo de manutenção ≈ **R$ 0** (só o domínio).
@@ -9,14 +9,17 @@ Cliente: **PF Construction Masonry** — Long Branch, NJ (atende Monmouth County
 - E-mail: **pf732masonry@gmail.com**
 
 ## 🎨 O design
-Layout editorial claro ("Atelier Stone"): fundo off-white tom papel, tipografia
-serifada gigante (Fraunces) + corpo Instrument Sans + detalhes técnicos em IBM
-Plex Mono, réguas de 1px, seções numeradas (01–07) e o vermelho da logo usado
-só como pontuação (quadradinhos, ponto final do título, botões). Animações
-"Cut Stone": revelação de imagens por corte (clip-path), textos subindo de
-máscaras, réguas que se desenham, contadores, parallax sutil e uma prévia de
-foto que segue o cursor na lista de serviços. Tudo respeita
-`prefers-reduced-motion` e funciona sem JS (conteúdo sempre visível).
+Layout industrial escuro ("Sitework"): a página lê como um caderno de projeto
+de obra — fundo quase-preto neutro, tipografia de sinalização (Sora 800
+maiúscula) + corpo Inter + anotações técnicas em IBM Plex Mono, réguas de 1px
+estilo blueprint, seções numeradas como folhas (Sheet 01–08), fitas de
+segurança vermelhas entre seções, cruzes de topografia, placas de legenda
+"FIG. NN" nas fotos, botões chanfrados e UMA seção clara (Processo) como folha
+de papel puxada do caderno. Animações "Cut Stone": revelação de imagens por
+corte (clip-path), títulos subindo de máscaras, réguas que se desenham,
+contadores, marquee dos serviços e prévia de foto que segue o cursor na lista
+de serviços. Tudo respeita `prefers-reduced-motion` e funciona sem JS
+(conteúdo sempre visível).
 
 ```
 PF Masonry/
@@ -84,16 +87,16 @@ miniaturas/links dos reels (ver `assets/videos/LEIA-ME.txt`).
 - Horário de atendimento (chave `contact.hoursV`) — confirmar.
 
 ### 6. Cores — `assets/css/styles.css`
-No topo, em `:root`. Paleta: papel `--paper: #F6F3EE`, quase-preto
-`--ink: #191714` e o vermelho da logo `--red: #D32027` (use pouco — ele é a
-pontuação da marca). Fontes: Fraunces / Instrument Sans / IBM Plex Mono
-(Google Fonts, carregadas no `<head>`).
+No topo, em `:root`. Paleta neutra: fundo `--bg: #0C0C0E`, painéis
+`--surface-1/2`, a folha clara `--paper: #F1F1F3` (só a seção Processo) e o
+vermelho da logo `--red: #D32027` (fita de segurança, CTAs e marcas).
+Fontes: Sora / Inter / IBM Plex Mono (Google Fonts, carregadas no `<head>`).
 
 ### 7. Logos
 | Arquivo                   | Onde aparece                                   |
 |---------------------------|------------------------------------------------|
-| `header-logo.png`         | Cabeçalho, barra fixa e menu mobile            |
-| `header-logo-white.png`   | (reserva para fundos escuros)                  |
+| `header-logo-white.png`   | Cabeçalho e menu mobile (fundo escuro)         |
+| `header-logo.png`         | (reserva para fundos claros)                   |
 | `logo-white.png`          | (reserva — o rodapé usa wordmark tipográfico)  |
 | `favicon.png`             | Ícone da aba do navegador (512×512)            |
 

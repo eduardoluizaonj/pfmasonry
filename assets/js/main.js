@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
   wireWhatsApp();
   document.addEventListener("i18n:applied", wireWhatsApp);
 
-  /* ---------- 2. Costura de progresso + barra fixa + WhatsApp flutuante ---------- */
+  /* ---------- 2. Costura de progresso + cabeçalho compacto + WhatsApp flutuante ---------- */
   const seam = document.querySelector("[data-seam]");
-  const dockbar = document.querySelector("[data-dockbar]");
+  const headerEl = document.querySelector("[data-header]");
   const waFloat = document.querySelector("[data-wa-float]");
   let scrollDirty = true;
 
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const y = window.scrollY;
       const max = document.documentElement.scrollHeight - window.innerHeight;
       if (seam) seam.style.transform = `scaleX(${max > 0 ? Math.min(y / max, 1) : 0})`;
-      if (dockbar) dockbar.classList.toggle("on", y > window.innerHeight * 0.9);
+      if (headerEl) headerEl.classList.toggle("is-tight", y > 120);
       if (waFloat) waFloat.classList.toggle("show", y > window.innerHeight * 0.8);
       driftFrame(y);
     }
@@ -263,24 +263,27 @@ document.addEventListener("DOMContentLoaded", () => {
   if (tstage) {
     const quotes = [...tstage.querySelectorAll(".tq")];
     const idxEl = document.querySelector("[data-tindex]");
-    let ti = 0, timer = null;
+    let ti = 0, timer = null, paused = false;
     const show = (i) => {
       ti = (i + quotes.length) % quotes.length;
       quotes.forEach((q, n) => q.classList.toggle("is-active", n === ti));
       if (idxEl) idxEl.textContent = `${ti + 1} / ${quotes.length}`;
     };
+    // não re-arma o timer enquanto o usuário está com o mouse/foco no bloco
     const restart = () => {
-      if (RM) return;
+      if (RM || paused) return;
       clearInterval(timer);
       timer = setInterval(() => show(ti + 1), 8000);
     };
     document.querySelector("[data-tprev]")?.addEventListener("click", () => { show(ti - 1); restart(); });
     document.querySelector("[data-tnext]")?.addEventListener("click", () => { show(ti + 1); restart(); });
     const band = tstage.closest(".tband");
-    band.addEventListener("mouseenter", () => clearInterval(timer));
-    band.addEventListener("mouseleave", restart);
-    band.addEventListener("focusin", () => clearInterval(timer));
-    band.addEventListener("focusout", restart);
+    if (band) {
+      band.addEventListener("mouseenter", () => { paused = true; clearInterval(timer); });
+      band.addEventListener("mouseleave", () => { paused = false; restart(); });
+      band.addEventListener("focusin", () => { paused = true; clearInterval(timer); });
+      band.addEventListener("focusout", () => { paused = false; restart(); });
+    }
     restart();
   }
 

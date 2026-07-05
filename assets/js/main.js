@@ -14,15 +14,12 @@ const CONFIG = {
   // assets/js/i18n.js na chave "wa.msg" e troca junto com o idioma do site.
   whatsappMessage: "Hi! I'd like a masonry estimate.",
 
-  // ===== FORMULÁRIO (envia para o e-mail do cliente) — use UMA opção, ambas grátis =====
-  // A) Web3Forms — NÃO precisa criar conta (recomendado):
-  //    1) Acesse https://web3forms.com
-  //    2) Digite o E-MAIL DO CLIENTE (pf732masonry@gmail.com) e clique em "Create Access Key"
-  //    3) Copie a chave que chega no e-mail e cole entre as aspas abaixo.
-  // ⚠️ TROCAR: gerar a chave com o e-mail do cliente.
-  // Enquanto vazio, o envio do formulário abre o WhatsApp com a mensagem preenchida.
-  web3formsKey: "",
-  // B) Formspree — precisa criar conta em https://formspree.io e colar a URL do form:
+  // ===== FORMULÁRIO (envia para o e-mail do cliente) =====
+  // Web3Forms (https://web3forms.com) — chave gerada com o e-mail do cliente
+  // (pf732masonry@gmail.com). Cada envio do formulário cai direto na caixa
+  // de entrada dele (até 250 envios/mês no plano grátis).
+  web3formsKey: "411350d5-8267-4e7a-b962-b068267a7eed",
+  // Alternativa: Formspree — criar conta em https://formspree.io e colar a URL do form:
   formEndpoint: ""
 };
 

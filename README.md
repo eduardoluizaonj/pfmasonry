@@ -58,23 +58,17 @@ lembra a escolha do visitante (botões **EN / PT / ES** no topo e no rodapé).
 const CONFIG = {
   whatsapp: "17324846643",       // (732) 484-6643 — código do país + número
   whatsappMessage: "Hi! ...",    // mensagem pré-preenchida (fallback)
-  web3formsKey: ""               // ⚠️ TROCAR: chave do Web3Forms (ver passo 3)
+  web3formsKey: "4113...7eed"    // ✅ configurada — envia pro e-mail do cliente
 };
 ```
 
-### 3. Formulário de contato (envia pro e-mail do cliente — grátis) ⚠️ PENDENTE
-**A) Web3Forms — não precisa criar conta (recomendado):**
-1. Acesse **https://web3forms.com**.
-2. Digite o e-mail do cliente (**pf732masonry@gmail.com**) e clique em "Create Access Key".
-3. Copie a chave que chega nesse e-mail e cole em `CONFIG.web3formsKey`.
-4. Pronto — cada mensagem do site cai direto no e-mail do cliente (até 250/mês).
-
-**B) Formspree — precisa criar conta:** crie em https://formspree.io, copie a
-URL do formulário e cole em `CONFIG.formEndpoint`.
-
-Enquanto nenhum dos dois estiver configurado, o "Enviar pedido" **abre o
-WhatsApp do cliente com a mensagem do formulário já preenchida** — nenhum
-lead se perde.
+### 3. Formulário de contato — ✅ conectado (Web3Forms)
+O "Send form" envia cada pedido **direto pro e-mail do cliente**
+(pf732masonry@gmail.com) via Web3Forms — até 250 envios/mês no plano grátis.
+Abaixo do botão também existem os atalhos "Chat on WhatsApp" e "Send email".
+Se um dia precisar trocar a chave, gere outra em https://web3forms.com com o
+e-mail do cliente e cole em `CONFIG.web3formsKey`. (Se a chave ficar vazia,
+o formulário cai no plano B: compõe um e-mail no app do visitante.)
 
 ### 4. Instagram — ✅ conectado
 Perfil real do cliente: **@pfconstructionmasonry**. O trilho da seção

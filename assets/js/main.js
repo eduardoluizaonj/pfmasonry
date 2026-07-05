@@ -48,6 +48,24 @@ document.addEventListener("DOMContentLoaded", () => {
   wireWhatsApp();
   document.addEventListener("i18n:applied", wireWhatsApp);
 
+  /* ---------- 1b. Links de e-mail (mailto com os dados do formulário) ---------- */
+  const EMAIL_TO = "pf732masonry@gmail.com";
+  function composeMailto() {
+    const f = document.querySelector("[data-form]");
+    const v = (n) => (f && f.elements[n] ? f.elements[n].value.trim() : "");
+    const body =
+      `${T("form.name", "Name")}: ${v("name")}\n` +
+      `${T("form.email", "Email")}: ${v("email")}\n` +
+      `${T("form.phone", "Phone")}: ${v("phone") || "-"}\n` +
+      `${T("form.service", "Service")}: ${v("service") || "-"}\n\n` +
+      `${v("message")}`;
+    return `mailto:${EMAIL_TO}?subject=${encodeURIComponent(T("email.subject", "Masonry estimate request — PF Masonry"))}&body=${encodeURIComponent(body)}`;
+  }
+  // Botão "Send email": ao clicar, prenche o mailto com o que já estiver no formulário
+  document.querySelectorAll(".js-email").forEach((el) => {
+    el.addEventListener("click", () => { el.setAttribute("href", composeMailto()); });
+  });
+
   /* ---------- 2. Cabeçalho ganha sombra ao rolar ---------- */
   const header = document.querySelector("[data-header]");
   const onScroll = () => header && header.classList.toggle("is-scrolled", window.scrollY > 30);
@@ -301,16 +319,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (form.elements._gotcha && form.elements._gotcha.value) return; // honeypot
       if (!validate()) return;
 
-      // Sem serviço de e-mail configurado: abre o WhatsApp com a mensagem pronta
+      // Sem serviço de e-mail server-side configurado: abre o app de e-mail do visitante
+      // já endereçado ao cliente, com os dados do formulário no corpo.
       if (!useW3 && !useFS) {
-        const v = (n) => (form.elements[n] ? form.elements[n].value.trim() : "");
-        const msg = `${T("wa.formIntro", "Hi! I'd like an estimate.")}\n` +
-          `• ${T("form.name", "Name")}: ${v("name")}\n` +
-          `• ${T("form.phone", "Phone")}: ${v("phone") || "-"}\n` +
-          `• ${T("form.email", "Email")}: ${v("email")}\n` +
-          `• ${T("form.service", "Service")}: ${v("service") || "-"}\n\n${v("message")}`;
-        window.open(waUrl(msg), "_blank", "noopener");
-        status.textContent = T("form.statusWa", "Opening WhatsApp with your message…");
+        window.location.href = composeMailto();
+        status.textContent = T("form.statusEmail", "Opening your email app…");
         status.classList.add("is-ok");
         return;
       }

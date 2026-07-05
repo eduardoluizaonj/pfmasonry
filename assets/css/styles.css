@@ -450,6 +450,11 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 12px); }
 .field__err { display: block; color: var(--primary); font-size: .78rem; font-weight: 600; min-height: 1em; padding-top: 4px; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 
+/* Linha com os 2 botões alternativos (WhatsApp + e-mail) abaixo do "Send form" */
+.form-alt { display: flex; gap: 12px; margin-top: 12px; }
+.form-alt .btn { flex: 1; min-width: 0; }
+@media (max-width: 400px) { .form-alt { flex-direction: column; } }
+
 .form-status { margin-top: 14px; font-size: .94rem; font-weight: 600; min-height: 1.2em; }
 .form-status.is-ok { color: #15803d; }
 .form-status.is-err { color: #b91c1c; }

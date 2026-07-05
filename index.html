@@ -93,7 +93,7 @@
         </div>
 
         <div class="hero__media reveal">
-          <img class="hero__img" src="assets/img/hero.jpg" alt="Paver patio with stone retaining wall" fetchpriority="high" decoding="async" />
+          <img class="hero__img" src="assets/img/hero.jpg" alt="Paver patio installed behind a home by PF Construction Masonry" fetchpriority="high" decoding="async" />
           <div class="hero__card">
             <span class="hero__card-stars" aria-label="5/5">★★★★★</span>
             <strong data-i18n="hero.cardT">Trusted across Monmouth County</strong>
@@ -212,32 +212,34 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
           </button>
 
-          <!-- Quando os reels do cliente chegarem, os cards viram miniaturas/links dos vídeos -->
+          <!-- Cards com o conteúdo real do Instagram do cliente — cada um abre o post/reel -->
           <div class="rail" data-rail>
-            <article class="reel-card">
-              <img src="assets/img/obra-1.jpg" alt="" loading="lazy" decoding="async" />
+            <a class="reel-card" href="https://www.instagram.com/reel/DYFnCu4tfnb/" target="_blank" rel="noopener">
+              <!-- reel real: toca sem som quando visível; o clique abre no Instagram -->
+              <video muted loop playsinline preload="none" poster="assets/img/reel-poster.jpg" data-reel-video>
+                <source src="assets/videos/reel-1.mp4" type="video/mp4" />
+              </video>
               <span class="reel-card__play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 6.5v11l9-5.5-9-5.5Z"/></svg></span>
-              <span class="reel-card__soon" data-i18n="reels.soon">Video coming soon</span>
-            </article>
-            <article class="reel-card">
-              <img src="assets/img/obra-5.jpg" alt="" loading="lazy" decoding="async" />
-              <span class="reel-card__play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 6.5v11l9-5.5-9-5.5Z"/></svg></span>
-              <span class="reel-card__soon" data-i18n="reels.soon">Video coming soon</span>
-            </article>
-            <article class="reel-card">
-              <img src="assets/img/obra-3.jpg" alt="" loading="lazy" decoding="async" />
-              <span class="reel-card__play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 6.5v11l9-5.5-9-5.5Z"/></svg></span>
-              <span class="reel-card__soon" data-i18n="reels.soon">Video coming soon</span>
-            </article>
-            <article class="reel-card">
-              <img src="assets/img/about-work.jpg" alt="" loading="lazy" decoding="async" />
-              <span class="reel-card__play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 6.5v11l9-5.5-9-5.5Z"/></svg></span>
-              <span class="reel-card__soon" data-i18n="reels.soon">Video coming soon</span>
-            </article>
-            <!-- ⚠️ TROCAR: usuário do Instagram (aqui e no i18n.js, chave reels.handle) -->
-            <a class="reel-card reel-card--follow" href="https://www.instagram.com/pfmasonry/" target="_blank" rel="noopener">
+              <span class="reel-card__tag" data-i18n="reels.tag1">Paver patio — watch the reel</span>
+            </a>
+            <a class="reel-card" href="https://www.instagram.com/p/DXkJ685kRTU/" target="_blank" rel="noopener">
+              <img src="assets/img/ig-1.jpg" alt="Interior stone fireplace" loading="lazy" decoding="async" />
+              <span class="reel-card__ig" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></span>
+              <span class="reel-card__tag" data-i18n="reels.tag2">Stone fireplace</span>
+            </a>
+            <a class="reel-card" href="https://www.instagram.com/p/DXkK8x2DGxP/" target="_blank" rel="noopener">
+              <img src="assets/img/ig-2.jpg" alt="Brick fireplace in progress" loading="lazy" decoding="async" />
+              <span class="reel-card__ig" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></span>
+              <span class="reel-card__tag" data-i18n="reels.tag3">Brick fireplace</span>
+            </a>
+            <a class="reel-card" href="https://www.instagram.com/p/DYFnaxPFL7P/" target="_blank" rel="noopener">
+              <img src="assets/img/obra-1.jpg" alt="Hexagonal paver driveway" loading="lazy" decoding="async" />
+              <span class="reel-card__ig" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></span>
+              <span class="reel-card__tag" data-i18n="reels.tag4">Hexagonal pavers</span>
+            </a>
+            <a class="reel-card reel-card--follow" href="https://www.instagram.com/pfconstructionmasonry/" target="_blank" rel="noopener">
               <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
-              <strong>@<span data-i18n="reels.handle">pfmasonry</span></strong>
+              <strong>@<span data-i18n="reels.handle">pfconstructionmasonry</span></strong>
               <span class="btn btn--primary btn--sm" data-i18n="reels.follow">Follow</span>
             </a>
           </div>
@@ -248,7 +250,7 @@
         </div>
 
         <div class="reels__cta reveal">
-          <a class="btn btn--dark" href="https://www.instagram.com/pfmasonry/" target="_blank" rel="noopener" data-i18n="reels.btn">View on Instagram</a>
+          <a class="btn btn--dark" href="https://www.instagram.com/pfconstructionmasonry/" target="_blank" rel="noopener" data-i18n="reels.btn">View on Instagram</a>
         </div>
       </div>
     </section>
@@ -270,8 +272,8 @@
           <a href="#contato" class="btn btn--dark reveal" data-i18n="about.btn">Talk to our team</a>
         </div>
         <div class="about__media reveal">
-          <img class="about__img-main" src="assets/img/about-team.jpg" alt="Mason laying a block wall" loading="lazy" decoding="async" />
-          <img class="about__img-sub" src="assets/img/about-work.jpg" alt="Brickwork detail" loading="lazy" decoding="async" />
+          <img class="about__img-main" src="assets/img/about-team.jpg" alt="Crew building a retaining wall and steps" loading="lazy" decoding="async" />
+          <img class="about__img-sub" src="assets/img/about-work.jpg" alt="Brick chimney being rebuilt" loading="lazy" decoding="async" />
           <!-- ⚠️ TROCAR: confirme os anos de experiência -->
           <div class="about__badge">
             <strong>10+</strong>
@@ -312,32 +314,32 @@
           <button class="filter" data-filter="paver" data-i18n="filter.paver">Pavers</button>
           <button class="filter" data-filter="brick" data-i18n="filter.brick">Brick</button>
           <button class="filter" data-filter="stone" data-i18n="filter.stone">Stone</button>
-          <button class="filter" data-filter="concrete" data-i18n="filter.concrete">Concrete</button>
+          <button class="filter" data-filter="tile" data-i18n="filter.tile">Tile</button>
         </div>
         <div class="gallery">
-          <button class="work work--lg reveal" data-category="paver" data-full="assets/img/obra-1.jpg" data-caption="Paver Patio">
-            <img src="assets/img/obra-1.jpg" alt="Stone paver patio" loading="lazy" decoding="async" />
-            <span class="work__info"><span class="work__tag" data-i18n="work1.tag">Pavers</span><span class="work__name" data-i18n="work1.name">Paver patio</span></span>
+          <button class="work work--lg reveal" data-category="paver" data-full="assets/img/obra-1.jpg" data-caption="Hexagonal Paver Driveway">
+            <img src="assets/img/obra-1.jpg" alt="Hexagonal paver driveway" loading="lazy" decoding="async" />
+            <span class="work__info"><span class="work__tag" data-i18n="work1.tag">Pavers</span><span class="work__name" data-i18n="work1.name">Hexagonal paver driveway</span></span>
           </button>
-          <button class="work reveal" data-category="brick" data-full="assets/img/obra-2.jpg" data-caption="Brick Wall">
-            <img src="assets/img/obra-2.jpg" alt="Red brick wall" loading="lazy" decoding="async" />
-            <span class="work__info"><span class="work__tag" data-i18n="work2.tag">Brick</span><span class="work__name" data-i18n="work2.name">Brick wall</span></span>
+          <button class="work reveal" data-category="brick" data-full="assets/img/obra-2.jpg" data-caption="Outdoor Brick Fireplace">
+            <img src="assets/img/obra-2.jpg" alt="Outdoor brick fireplace with mantel" loading="lazy" decoding="async" />
+            <span class="work__info"><span class="work__tag" data-i18n="work2.tag">Brick</span><span class="work__name" data-i18n="work2.name">Outdoor brick fireplace</span></span>
           </button>
-          <button class="work reveal" data-category="stone" data-full="assets/img/obra-3.jpg" data-caption="Garden Stone Wall">
-            <img src="assets/img/obra-3.jpg" alt="Garden stone wall with arches" loading="lazy" decoding="async" />
-            <span class="work__info"><span class="work__tag" data-i18n="work3.tag">Stone</span><span class="work__name" data-i18n="work3.name">Garden stone wall</span></span>
+          <button class="work reveal" data-category="stone" data-full="assets/img/obra-3.jpg" data-caption="Stone Veneer Chimney">
+            <img src="assets/img/obra-3.jpg" alt="Stone veneer chimney on a shingle house" loading="lazy" decoding="async" />
+            <span class="work__info"><span class="work__tag" data-i18n="work3.tag">Stone</span><span class="work__name" data-i18n="work3.name">Stone veneer chimney</span></span>
           </button>
-          <button class="work reveal" data-category="concrete" data-full="assets/img/obra-4.jpg" data-caption="Concrete Driveway">
-            <img src="assets/img/obra-4.jpg" alt="Concrete driveway of a modern house" loading="lazy" decoding="async" />
-            <span class="work__info"><span class="work__tag" data-i18n="work4.tag">Concrete</span><span class="work__name" data-i18n="work4.name">Concrete driveway</span></span>
+          <button class="work reveal" data-category="tile" data-full="assets/img/obra-4.jpg" data-caption="Bluestone Porch Walkway">
+            <img src="assets/img/obra-4.jpg" alt="Bluestone porch walkway" loading="lazy" decoding="async" />
+            <span class="work__info"><span class="work__tag" data-i18n="work4.tag">Tile</span><span class="work__name" data-i18n="work4.name">Bluestone porch walkway</span></span>
           </button>
-          <button class="work reveal" data-category="paver" data-full="assets/img/obra-5.jpg" data-caption="Outdoor Patio">
-            <img src="assets/img/obra-5.jpg" alt="Outdoor patio with furniture" loading="lazy" decoding="async" />
-            <span class="work__info"><span class="work__tag" data-i18n="work5.tag">Pavers</span><span class="work__name" data-i18n="work5.name">Outdoor patio</span></span>
+          <button class="work reveal" data-category="tile" data-full="assets/img/obra-5.jpg" data-caption="Porcelain Tile Patio">
+            <img src="assets/img/obra-5.jpg" alt="Porcelain tile patio with stone columns" loading="lazy" decoding="async" />
+            <span class="work__info"><span class="work__tag" data-i18n="work5.tag">Tile</span><span class="work__name" data-i18n="work5.name">Porcelain tile patio</span></span>
           </button>
-          <button class="work reveal" data-category="stone" data-full="assets/img/obra-6.jpg" data-caption="Stone Patio">
-            <img src="assets/img/obra-6.jpg" alt="Stone patio with wall" loading="lazy" decoding="async" />
-            <span class="work__info"><span class="work__tag" data-i18n="work6.tag">Stone</span><span class="work__name" data-i18n="work6.name">Stone patio</span></span>
+          <button class="work reveal" data-category="stone" data-full="assets/img/obra-6.jpg" data-caption="Retaining Wall &amp; Patio">
+            <img src="assets/img/obra-6.jpg" alt="Retaining wall with paver patio" loading="lazy" decoding="async" />
+            <span class="work__info"><span class="work__tag" data-i18n="work6.tag">Stone</span><span class="work__name" data-i18n="work6.name">Retaining wall &amp; patio</span></span>
           </button>
         </div>
       </div>

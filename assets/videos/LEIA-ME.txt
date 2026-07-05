@@ -1,19 +1,18 @@
 VÍDEOS / REELS DO CLIENTE
 =========================
 
-A seção "Instagram" do site mostra um trilho horizontal de cards 9:16
-(.reel-card no index.html) que hoje usam FOTOS como capa, com o selo
-"Vídeo em breve", mais um card final de "Seguir" apontando para o perfil
-(placeholder @pfmasonry — ⚠️ confirmar o usuário real).
+✅ EM USO: reel-1.mp4 é o reel real do cliente (perfil @pfconstructionmasonry,
+post /reel/DYFnCu4tfnb/). Ele toca sem som no 1º card do trilho da seção
+Instagram quando o card entra na tela; o clique abre o reel no Instagram.
+(É a faixa de vídeo em bitrate menor, sem áudio — de propósito: o card
+toca mudo e pesa só ~5,6 MB.)
 
-Quando os reels do cliente chegarem, há duas opções (me avise que eu aplico):
-
-1. MAIS SIMPLES — apontar cada card para o link do reel no Instagram
-   (transformar cada .reel-card em <a href="link-do-reel"> e usar um
-   frame do vídeo como capa).
-
-2. VÍDEO NO PRÓPRIO SITE — salvar os arquivos .mp4 (9:16, H.264,
-   de preferência < 10 MB cada) NESTA PASTA e trocar as <img> dos cards
-   por <video muted loop playsinline> no index.html.
+Para ADICIONAR novos reels no futuro:
+1. Salve o .mp4 nesta pasta (9:16, H.264, de preferência < 10 MB).
+2. No index.html, duplique o 1º .reel-card do trilho (o que tem <video>),
+   aponte o <source> para o novo arquivo, o poster para uma imagem em
+   assets/img/ e o href para o link do reel no Instagram.
+3. Adicione a etiqueta do card no assets/js/i18n.js (chaves reels.tagN,
+   nos 3 idiomas).
 
 Dica de compressão gratuita: https://www.freeconvert.com/video-compressor

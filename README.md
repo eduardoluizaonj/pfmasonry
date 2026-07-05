@@ -76,21 +76,16 @@ Enquanto nenhum dos dois estiver configurado, o "Enviar pedido" **abre o
 WhatsApp do cliente com a mensagem do formulário já preenchida** — nenhum
 lead se perde.
 
-### 4. Instagram — ⚠️ TROCAR
-O usuário do Instagram está como placeholder **@pfmasonry**. Confirme o real e troque:
-- em `index.html` (links `instagram.com/...` na seção "06 — On site"),
-- em `assets/js/i18n.js` (chave `reels.handle`, nos 3 idiomas).
+### 4. Instagram — ✅ conectado
+Perfil real do cliente: **@pfconstructionmasonry**. O trilho da seção
+Instagram usa o conteúdo real: o 1º card toca o reel do cliente (sem som,
+`assets/videos/reel-1.mp4`) e os demais linkam para os posts reais.
+Para trocar/adicionar cards depois, edite os `.reel-card` no `index.html`
+(cada um é um link para o post) e as chaves `reels.tagN` no `i18n.js`.
 
-A seção mostra um trilho horizontal de cards 9:16. Os dois primeiros estão como
-"Reels em breve"; quando os vídeos do cliente chegarem, os cards viram
-miniaturas/links dos reels (ver `assets/videos/LEIA-ME.txt`).
-
-### 5. Números, cidades e depoimentos — ⚠️ TROCAR
-- Números da seção "01 — Record" (`data-count` no `index.html`) — confirmar.
-- As **cidades** nas legendas da galeria ("05 — Work") são exemplos — troque
-  pelas cidades reais de cada projeto (no `index.html` e nas chaves `workN.name`).
+### 5. Números e depoimentos — ⚠️ TROCAR
+- Números da faixa escura (`data-count` no `index.html`) — confirmar.
 - Os 3 depoimentos são fictícios — troque por avaliações reais.
-- Horário de atendimento (chave `contact.hoursV`) — confirmar.
 
 ### 6. Cores — `assets/css/styles.css`
 No topo, em `:root`. A paleta segue a **logo da PF Masonry**
@@ -105,19 +100,17 @@ branco/cinza neutro. Fontes: Inter (corpo) + Sora (títulos), via Google Fonts.
 | `logo-white.png`          | Rodapé (lockup completo em branco)             |
 | `favicon.png`             | Ícone da aba do navegador (512×512)            |
 
-### 8. Fotos — `assets/img/`
-Substitua mantendo os **mesmos nomes**:
+### 8. Fotos — `assets/img/` — ✅ fotos reais do cliente
+As fotos vieram do Instagram do cliente (@pfconstructionmasonry), em 1080px.
+Para trocar alguma, substitua o arquivo mantendo o **mesmo nome**:
 
-| Arquivo         | Onde aparece                                        |
-|-----------------|-----------------------------------------------------|
-| `hero.jpg`      | Foto grande do topo                                 |
-| `about-team.jpg`/`about-work.jpg` | Seção "03 — About" (+ prévias de serviços) |
-| `obra-1..6.jpg` | Galeria "05 — Work", prévias e cards do Instagram   |
-| `cta.jpg`       | Textura da faixa escura de orçamento                |
-
-> As fotos atuais são do Unsplash (uso livre) como demonstração. **Troque pelas
-> fotos reais dos projetos da PF Masonry.** Use imagens com ≥1280px de largura
-> (otimize em https://squoosh.app).
+| Arquivo         | Conteúdo atual                                       |
+|-----------------|------------------------------------------------------|
+| `hero.jpg`      | Pátio de pavers atrás de casa (topo)                 |
+| `obra-1..6.jpg` | Galeria: pavers hexagonais, lareira de tijolo, chaminé de pedra, bluestone, porcelanato, muro de arrimo |
+| `about-team.jpg`/`about-work.jpg` | Sobre: equipe na obra + chaminé com andaime |
+| `ig-1.jpg`/`ig-2.jpg`/`reel-poster.jpg` | Cards do trilho do Instagram      |
+| `cta.jpg`       | Textura da faixa escura (Unsplash — única não-real)  |
 
 ---
 

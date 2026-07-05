@@ -171,6 +171,24 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     document.querySelector("[data-rail-prev]")?.addEventListener("click", () => rail.scrollBy({ left: -step(), behavior: SCROLL_BEHAVIOR }));
     document.querySelector("[data-rail-next]")?.addEventListener("click", () => rail.scrollBy({ left: step(), behavior: SCROLL_BEHAVIOR }));
+
+    // Reel do cliente: toca (sem som) só enquanto o card está visível.
+    // Com "reduzir movimento" ativo, fica no poster.
+    const reelVideos = rail.querySelectorAll("[data-reel-video]");
+    if (reelVideos.length && !RM && "IntersectionObserver" in window) {
+      const vo = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          const v = en.target;
+          if (en.isIntersecting) {
+            const p = v.play();
+            if (p && p.catch) p.catch(() => {});
+          } else {
+            v.pause();
+          }
+        });
+      }, { threshold: 0.4 });
+      reelVideos.forEach((v) => vo.observe(v));
+    }
   }
 
   /* ---------- 8. Filtro da galeria ---------- */

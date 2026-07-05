@@ -112,6 +112,7 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 12px); }
 }
 .btn:hover { transform: translateY(-2px); }
 .btn:active { transform: translateY(0); }
+.btn svg { flex-shrink: 0; }
 
 .btn--primary { --btn-bg: var(--primary); --btn-fg: #fff; box-shadow: 0 8px 22px rgba(211, 32, 39, .32); }
 .btn--primary:hover { --btn-bg: var(--primary-600); box-shadow: 0 12px 28px rgba(211, 32, 39, .42); }
@@ -453,7 +454,8 @@ section[id] { scroll-margin-top: calc(var(--header-h) + 12px); }
 /* Linha com os 2 botões alternativos (WhatsApp + e-mail) abaixo do "Send form" */
 .form-alt { display: flex; gap: 12px; margin-top: 12px; }
 .form-alt .btn { flex: 1; min-width: 0; }
-@media (max-width: 400px) { .form-alt { flex-direction: column; } }
+/* em telas de celular os 2 botoes empilham (cabe texto + icone sem quebrar) */
+@media (max-width: 600px) { .form-alt { flex-direction: column; } }
 
 .form-status { margin-top: 14px; font-size: .94rem; font-weight: 600; min-height: 1.2em; }
 .form-status.is-ok { color: #15803d; }

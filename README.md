@@ -116,8 +116,9 @@ Para trocar alguma, substitua o arquivo mantendo o **mesmo nome**:
 3. O site sobe em segundos, com HTTPS automático.
 4. Aponte o domínio do cliente em "Domínios".
 
-> Ao definir o domínio final, atualize também o `og:image` e o `canonical`
-> no `<head>` do `index.html` (hoje apontam para www.pfmasonry.com).
+> Domínio final: **pfconstructionmasonry.com** (o `www` redireciona para ele).
+> Se o domínio mudar, atualize também o `canonical`, o `og:url` e o `og:image`
+> no `<head>` do `index.html`.
 
 ### GitHub Pages
 1. Suba os arquivos para um repositório.
